@@ -9,6 +9,7 @@ if(!isset($_SESSION['id'])) {
 }
 
 include ('../vista/nav.html');
+
 $x=0;
 if(array_key_exists('x', $_GET)){
 	$x = $_GET['x'];
