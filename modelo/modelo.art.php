@@ -2,7 +2,7 @@
 
 require_once ('../controlador/index.php');
 	
-	class artista{
+	class participantes{
 
 	private $cedula;
 	private $nombre;
@@ -19,7 +19,7 @@ require_once ('../controlador/index.php');
 	private $id_agrupacion;
 	private $status;
 	    
-	public  function artista()
+	public  function participantes()
 	{
 		$this->cedula="";
 		$this->nombre="";

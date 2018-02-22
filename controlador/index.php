@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION['id'])) {
-	header('Location: ../vista/login.html');
+	header('Location: ../vista/inicio.html');
 } else {
 	$estado = $_SESSION['id'];
 }

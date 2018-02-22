@@ -1,6 +1,6 @@
 <?php
 
-@$id = $_POST['id'];
+@$id = $_POST['usuario'];
 @$clave = $_POST['clave'];
 
 

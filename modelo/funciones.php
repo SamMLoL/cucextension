@@ -4,7 +4,7 @@ if (isset($_REQUEST['Inicio'])){
 	$x = 1;
 }
 
-if (isset($_REQUEST['artista'])){
+if (isset($_REQUEST['participantes'])){
 	$x = 2;
 }
 
