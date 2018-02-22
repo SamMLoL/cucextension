@@ -1,0 +1,204 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+body{
+	font-size: 16px;
+}
+.contenido-scrollspy{
+	overflow-y: scroll;
+	height: 550px;
+}
+.image-agregar {
+position: relative;
+
+ /* for IE 6 */
+
+}
+
+.h2-agregar {
+position: absolute;
+text-align: center;
+
+}
+
+.span-agregar {
+color: black;
+font: bold 26px/45px Helvetica, Sans-Serif;
+padding: 10px;
+width: 600px;
+height:700px;
+}
+
+@media only screen and (max-width: 1500px){
+.span-agregar{
+font: bold 24px/45px Helvetica, Sans-Serif;
+padding: 10px;
+width: 500px;
+height: 200px;
+}
+
+}
+@media only screen and (max-width: 1400px){
+.span-agregar{
+font: bold 23px/44px Helvetica, Sans-Serif;
+padding: 9px;
+width: 480px;
+height:200px;
+}
+}
+@media only screen and (max-width: 1300px){
+.span-agregar{
+font: bold 22px/43px Helvetica, Sans-Serif;
+padding: 8px;
+width: 460px;
+height:200px;
+}
+
+}
+@media only screen and (max-width: 1200px){
+.span-agregar{
+font: bold 21px/41px Helvetica, Sans-Serif;
+padding: 7px;
+width: 440px;
+height:200px;
+}
+}
+@media only screen and (max-width: 1100px){
+.span-agregar{
+font: bold 19px/40px Helvetica, Sans-Serif;
+padding: 6px;
+width: 420px;
+height:190px;
+}
+
+}
+
+@media only screen and (max-width: 1050px){
+.span-agregar{
+font: bold 18px/39px Helvetica, Sans-Serif;
+padding: 6px;
+width: 410px;
+height:180px;
+}
+
+}
+@media only screen and (max-width: 1000px){
+.span-agregar{
+font: bold 18px/34px Helvetica, Sans-Serif;
+padding: 5px;
+width: 400px;
+height:180px;
+
+}
+
+}
+@media only screen and (max-width: 900px){
+.span-agregar{
+font: bold 16px/28px Helvetica, Sans-Serif;
+padding: 4px;
+width: 380px;
+height:170px;
+
+}
+}
+@media only screen and (max-width: 800px){
+.span-agregar{
+font: bold 15px/28px Helvetica, Sans-Serif;
+padding: 4px;
+width: 360px;
+height:150px;
+
+}
+}
+@media only screen and (max-width: 790px){
+.span-agregar{
+font: bold 15px/28px Helvetica, Sans-Serif;
+padding: 4px;
+width: 350px;
+height:150px;
+
+}
+}
+
+@media only screen and (max-width: 780px){
+.span-agregar{
+font: bold 15px/28px Helvetica, Sans-Serif;
+padding: 3px;
+width: 300px;
+height:160px;
+
+}
+}
+@media only screen and (max-width: 700px){
+.span-agregar{
+font: bold 15px/28px Helvetica, Sans-Serif;
+padding: 3px;
+width: 380px;
+height:150px;
+
+}
+}
+@media only screen and (max-width: 650px){
+.span-agregar{
+font: bold 14px/22px Helvetica, Sans-Serif;
+padding: 2px;
+width: 340px;
+height: 140px;
+}
+
+
+}
+@media only screen and (max-width: 600px){
+.span-agregar{
+font: bold 13px/20px Helvetica, Sans-Serif;
+padding: 0px;
+width: 300px;
+height: 130px;
+}
+
+}
+
+@media only screen and (max-width: 550px){
+.span-agregar{
+font: bold 12px/18px Helvetica, Sans-Serif;
+padding: 0px;
+width: 270px;
+height: 120px;
+}
+
+}
+
+@media only screen and (max-width: 500px){
+.span-agregar{
+font: bold 10px/18px Helvetica, Sans-Serif;
+padding: 0px;
+width: 240px;
+height: 60px;
+}
+
+}
+@media only screen and (max-width: 450px){
+.span-agregar{
+font: bold 0px/0px Helvetica, Sans-Serif;
+padding: 1px;
+width: 2px;
+height: 4px;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

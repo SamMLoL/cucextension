@@ -1,0 +1,161 @@
+
+
+<div class="container col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-offset-1 col-sm-10 col-xs-12 ">
+	<div class="tab-pane" id="artista">
+		<div class="row">
+			<div class="col-md-9 col-sm-9 col-xs-9 tab-content" data-spy="scroll" data-target="#menu" data_offset="0">
+				<div class=" tab-pane in active" id="id1">	
+					<div class="panel panel-primary tab-pane" id="ad1">
+						<div class="panel-heading">Agregar</div>
+
+						<div class="panel-body image-agregar">
+							<img src="../vista/img/agregar.png" alt="agregar" class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-offset-3 col-xs-6">
+
+								<div class="h2-agregar col-lg-offset-2 col-lg-8 col-offset-2 col-md-offset-2 col-md-8 col-offset-2 col-sm-offset-1 col-sm-10 col-offset-1 col-xs-offset-0 col-xs-12 col-offset-0">
+									<br><br>
+									<div>
+										<button class="btn btn-primary bt btn-lg btn-block" data-toggle="modal" data-target="#agregar11">Registrar Participante</button>
+
+										<div class="modal fade" role="dialog" id="agregar11">
+											<div class="modal-dialog">
+												
+
+			<div class="modal-content">
+            <div class="modal-header">
+                <button class="close" aria-hidden="true" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="icon-rayos glyphicon"></span>REGISTRO DE PARTICIPANTE</h4>
+            </div>
+
+            <div class="modal-body">
+                              
+            <form class="form-horizontal" action="../controlador/registrar.art.php" method="POST">
+                    <div class="form-group">
+                                <label class="control-label col-xs-3">Cedula:</label>
+                                    <div class="col-xs-9">
+                                    <input type="text" class="form-control" name="cedula" placeholder="Cedula" pattern="[0-9]{8}" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-3">Nombre:</label>
+                                <div class="col-xs-9">
+                                    <input type="text" class="form-control" name="nombre" placeholder="Nombre" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-3">Apellido:</label>
+                                <div class="col-xs-9">
+                                    <input type="text" class="form-control" name="apellido" placeholder="Apellido" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-3">Edad:</label>
+                                 <div class="col-xs-9">
+                                <input type="number" class="form-control" name="edad" placeholder="edad"  maxlength="2" max="99" min="10" required/>
+                                </div>
+                            </div>
+                    <div class="form-group">
+                    <label class="control-label col-xs-3" for="carrera">Carrera:</label>
+                        <div class="col-xs-5">
+                          <select class="form-control" name="carrera" required>
+                              <option disabled selected=>Seleccione</option>
+                              <option value="PNFA">PNFA</option>
+                              <option value="PNFI">PNFI</option>
+                              <option value="PNFT">PNFT</option>
+                              <option value="Trabajo Social">Trabajo Social</option>
+                              <option value="Educacion Preescolar">Educacion Preescolar</option>
+                              <option value="Ninguna">Ninguna</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="control-label col-xs-3" for="sexo">Sexo:</label>
+                        <div class="col-xs-5">
+                          <select class="form-control" name="sexo" required>
+                        <option disabled selected>Seleccione</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                    </select>
+                    </div>
+                    </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-3">Correo:</label>
+                                <div class="col-xs-9">
+                                    <input type="Email" class="form-control" name="correo" placeholder="Correo electronico" required="">
+                                </div>
+                            </div>
+                    <div class="form-group">
+                                <label class="control-label col-xs-3" >Telefono:</label>
+                                <div class="col-xs-9">
+                                    <input type="tel" class="form-control" name="telefono" placeholder="Telefono" pattern="[0-9]{11}" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" >Ocupación:</label>
+                                <div class="col-xs-9">
+                                    <input type="text" class="form-control" name="descripcion_art" placeholder="Ocupacion" required/>
+                                </div>
+                            </div>
+                   
+                        <div class="form-group">
+                        <label class="control-label col-xs-3" for="disciplina">Estatus:</label>
+                        <div class="col-xs-5">
+                        <select class="form-control" name="status" required>
+                        <option disabled selected>Seleccione</option>
+                        <option value="t">Activo</option>
+                        <option value="f">Inactivo</option>
+
+                        </select>
+                        </div>
+                        </div>          
+                        
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+			                				</div>
+
+										</div>
+									</div>
+										<br><br><br>
+						<!-- botton agrupacion participantes-->
+									<div>
+										<button class="btn btn-primary bt btn-lg btn-block" data-toggle="modal" data-target="#modal_agru">Registrar/Modificar/eliminar Equipos o Clubs</button>
+									</div>
+										<br><br><br>
+						<!-- botton disciplina participantes-->
+									<div>
+										<button class="btn btn-primary bt btn-lg btn-block" data-toggle="modal" data-target="#modal_dis">Registrar/Modificar/eliminar Disciplina</button>
+									</div>
+
+								 </div>
+						</div>
+
+					</div>	
+							
+				</div>
+			</div>
+				<div class="col-md-3 col-sm-3 col-xs-3">
+
+                            <ul class="nav flex-column">
+								<h4>Contenido</h4>
+								<li class="nav-item">
+							    	<a class="nav-link active" href="index.php?x=1">Inicio</a>
+							  	</li>
+							  	<li class="nav-item">
+							    	<a class="nav-link" href="index.php?x=2">Agregar</a>
+							  	</li>
+							  	<li class="nav-item">
+							    	<a class="nav-link" href="index.php?x=3">Consultar</a>
+							  	</li>
+							</ul>
+
+				</div>
+		</div>
+	</div>
+</div>
+
+
