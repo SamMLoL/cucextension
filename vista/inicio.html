@@ -33,16 +33,16 @@
                 <h3><b>Registro</b></h3></div>
               <form id="ajax-register-form" action="#" method="POST" role="form" autocomplete="off">
                 <div class="form-group">
-                  <input type="text" name="usuario" id="usuario" tabindex="1" class="form-control" placeholder="Nombre de Usuario" value="">
+                  <input type="text" name="usuario" id="usuario" tabindex="1" class="form-control" placeholder="Nombre de Usuario" value="" required>
                 </div>
                 <div class="form-group">
-                  <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Correo Electronico" value="">
+                  <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Correo Electronico" value="" required>
                 </div>
                 <div class="form-group">
-                  <input type="password" name="Clave" id="Clave" tabindex="2" class="form-control" placeholder="Contraseña">
+                  <input type="password" name="Clave" id="Clave" tabindex="2" class="form-control" placeholder="Contraseña" required>
                 </div>
                 <div class="form-group">
-                  <input type="password" name="clave-admin" id="clave-admin" tabindex="2" class="form-control" placeholder="Clave de Administrador">
+                  <input type="password" name="clave-admin" id="clave-admin" tabindex="2" class="form-control" placeholder="Clave de Administrador" required>
                 </div>
                 <div class="form-group">
                   <div class="row">
@@ -64,17 +64,17 @@
               <form id="ajax-login-form" action="../controlador/sesion.php" method="POST" role="form" autocomplete="off">
                 <div class="form-group">
                   <label for="username">Nombre de usuario</label>
-                  <input type="text" name="usuario" id="usuario" tabindex="1" class="form-control" placeholder="Nombre de Usuario" value="" autocomplete="off">
+                  <input type="text" name="usuario" id="usuario" tabindex="1" class="form-control" placeholder="Nombre de Usuario" value="" autocomplete="off" required>
                 </div>
 
                 <div class="form-group">
                   <label for="password">Contraseña</label>
-                  <input type="password" name="clave" id="clave" tabindex="2" class="form-control" placeholder="Contraseña" autocomplete="off">
+                  <input type="password" name="clave" id="clave" tabindex="2" class="form-control" placeholder="Contraseña" autocomplete="off" required>
                 </div>
 
                 <div class="form-group">
                   <div class="row">
-                    <div class="col-xs-5 pull-right">
+                    <div class="col-xs-6 col-xs-offset-3">
                       <input type="submit" name="login" id="login" tabindex="4" class="form-control btn btn-success" value="Ingresar">
                     </div>
                   </div>
