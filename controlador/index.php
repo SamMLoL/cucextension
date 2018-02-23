@@ -42,6 +42,16 @@ switch ($x){
 	$html = file_get_contents('../vista/ConsultarPro.html');
 	echo $html; 
 	break;
+	case 7: 
+			session_start();
+
+			unset($_SESSION);
+
+			session_destroy();
+
+			header("Location: index.php");
+			die();
+	break;
 
 	default: 
 		$html = file_get_contents('../vista/v1.html');

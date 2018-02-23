@@ -31,18 +31,22 @@
             <div class="col-lg-12">
               <div class="text-center">
                 <h3><b>Registro</b></h3></div>
-              <form id="ajax-register-form" action="#" method="POST" role="form" autocomplete="off">
+              <form id="formuRegistro" action="../controlador/usuario-control.php?x=2" method="POST" role="form" autocomplete="off">
                 <div class="form-group">
                   <input type="text" name="usuario" id="usuario" tabindex="1" class="form-control" placeholder="Nombre de Usuario" value="" required>
                 </div>
                 <div class="form-group">
-                  <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Correo Electronico" value="" required>
+                  <input type="email" name="correo" id="correo" tabindex="1" class="form-control" placeholder="Correo Electronico" value="" required>
                 </div>
                 <div class="form-group">
-                  <input type="password" name="Clave" id="Clave" tabindex="2" class="form-control" placeholder="Contraseña" required>
+                  <input type="password" name="clave" id="clave" tabindex="2" class="form-control" placeholder="Contraseña" required>
                 </div>
                 <div class="form-group">
-                  <input type="password" name="clave-admin" id="clave-admin" tabindex="2" class="form-control" placeholder="Clave de Administrador" required>
+                  <input type="password" name="confir-clave" id="confir-clave" tabindex="2" class="form-control" placeholder="Verificar contraseña" required>
+                </div>
+                <div class="form-group">
+                  <input type="password" name="clave-admin" id="clave-admin" tabindex="2" class="form-control" placeholder="Clave de Administrador" required
+                  >
                 </div>
                 <div class="form-group">
                   <div class="row">
@@ -61,7 +65,7 @@
             <div class="col-lg-12">
               <div class="text-center">
                 <h3><b>login</b></h3></div>
-              <form id="ajax-login-form" action="../controlador/sesion.php" method="POST" role="form" autocomplete="off">
+              <form id="formulogin" action="../controlador/usuario-control.php?x=1" method="POST" role="form" autocomplete="off">
                 <div class="form-group">
                   <label for="username">Nombre de usuario</label>
                   <input type="text" name="usuario" id="usuario" tabindex="1" class="form-control" placeholder="Nombre de Usuario" value="" autocomplete="off" required>
@@ -97,9 +101,6 @@
       </ul>
   </div>
 </div>
-
-
-
 	
 </body>
 
