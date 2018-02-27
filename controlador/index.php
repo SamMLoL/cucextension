@@ -49,7 +49,7 @@ switch ($x){
 
 			session_destroy();
 
-			header("Location: index.php");
+			header("Location: ../vista/inicio.html");
 			die();
 	break;
 
