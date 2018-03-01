@@ -40,11 +40,11 @@ switch ($x){
 	break;
 //funcion Registrar
 	case 2: 
-			@$id = $_POST["usuario"];
-			@$correo = $_POST['correo'];
-			@$clave = $_POST['clave'];
-			@$clave_admin = $_POST['clave-admin'];
-			@$clave_ver = $_POST['confir-clave'];
+			$id = $_POST["usuario"];
+			$correo = $_POST['correo'];
+			$clave = $_POST['clave'];
+			$clave_admin = $_POST['claveadmin'];
+			$clave_ver = $_POST['confirclave'];
 
 			if ($clave_admin=="extension123") {
 
@@ -55,30 +55,22 @@ switch ($x){
 
 					if ($crear) {
 
-						echo "<div class='col-sm-12'><center><font color='limegreen' size='4'><strong>Usuario Registrado</strong></font></center></div>";
-
-								require_once("../vista/inicio.html");
+						echo "<center><font color='green'>Usuario Registrado<font><center>";
 
 						}
 						else {
-								echo "<div class='col-sm-12'><center><font color='red' size='4'><strong>No se logro registrar el usuario</strong></font></center></div>";
-
-								require_once("../vista/inicio.html");
+								echo "<center><font color='red'>No se logro registrar el usuario<font><center>";
 				 		}
 					}
 					else
 						{
-							echo "<div class='col-sm-12'><center><font color='red' size='4'><strong>Las contraseñas no coinciden</strong></font></center></div>";
-
-								require_once("../vista/inicio.html");
+							echo "<center><font color='red'>Las contraseñas no coinciden<font><center>";
 						}
 				}
 					
 					else{
 
-						echo "<div class='col-sm-12'><center><font color='red' size='4'><strong>No se logro registrar el usuario <br> verique la contraseña de administrador</strong></font></center></div>";
-
-						require_once("../vista/inicio.html");
+						echo "<center><font color='red'>Contraseña de administrador incorrecta<font><center>";
 						}
 
 	break;
