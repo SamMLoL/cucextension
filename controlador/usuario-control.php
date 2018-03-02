@@ -10,8 +10,8 @@ if(array_key_exists('x', $_GET)){
 switch ($x){
 //fuincion SESION
 	case 1:  
-		@$id = $_POST['usuario'];
-		@$clave = $_POST['clave'];
+		@$id = $_POST['usuariologin'];
+		@$clave = $_POST['clavelogin'];
 
 		$obj_usuario = new usuario();
 
@@ -29,12 +29,10 @@ switch ($x){
 			session_start();
 			$_SESSION['id']= $row['id'];
 			$_SESSION['estado'] = 'Autentificado';
-			header("Location:index.php");
+			echo "ok";
 		}else{
 
-			echo "<div class='col-sm-12'><center><font color='red' size='4'><strong>Contraseña o Usuario Incorrecto</strong></font></center></div>";
-
-			require_once("../vista/inicio.html");
+			echo "error";
 		 }
 
 	break;
