@@ -53,23 +53,44 @@ switch ($x){
 
 					if ($crear) {
 
-						echo "<center><font color='green'>Usuario Registrado<font><center>";
+						echo "<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Registrado!</strong> El usuario ha sido ha registrado exitosamente.</div>";
 
 						}
 						else {
-								echo "<center><font color='red'>No se logro registrar el usuario<font><center>";
+								echo "<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se logro registrar el usuario.</div>";
 				 		}
 					}
 					else
 						{
-							echo "<center><font color='red'>Las contraseñas no coinciden<font><center>";
+							echo "<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> las contraseñas no coinciden</div>";
 						}
 				}
 					
 					else{
 
-						echo "<center><font color='red'>Contraseña de administrador incorrecta<font><center>";
+						echo "<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> Contraseña de administrador incorrecta</div>";
 						}
+
+	break;
+
+	case 3: 
+
+			$id = $_POST["usuario"];
+
+
+			if (!empty($id)) {
+
+					$obj_consulta= new usuario();
+					$consultar = $obj_consulta->consultarUsuario($id);
+
+			if($consultar == 0){
+                  echo "<span style='font-weight:bold;color:green;'>Disponible</span>";
+            }else{
+                  echo "<span style='font-weight:bold;color:red;'>El nombre de usuario ya existe.</span>";
+            }
+
+				}
+					
 
 	break;
 

@@ -46,6 +46,23 @@ class usuario{
 			}
 	}
 
+	public function consultarUsuario($id)
+	{
+		$obj_conex = new Conexion();
+		$obj_conex -> conectar();
+		$query = @pg_query(" SELECT * FROM
+			public.usuario WHERE id='$id';");
+		if (pg_num_rows($query)>0) {
+			return $query;
+		}
+		else
+		{
+			return false;
+		}
+
+
+	}
+
 	public function Recuperar($id)
 	{
 		$obj_conex = new Conexion();

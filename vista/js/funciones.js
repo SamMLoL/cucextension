@@ -1,6 +1,24 @@
     $(document).ready(function() {
         $("#ok").hide();
 
+            $('#usuario').blur(function(){
+
+                    $('#info').html('<img src="loader.gif" alt="" />').fadeOut(300);
+
+                    var usuario = $(this).val();        
+                    var dataString = 'usuario='+usuario;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../controlador/usuario-control.php?x=3",
+                        data: dataString,
+                        success: function(data) {
+                            $('#info').fadeIn(300).html(data);
+                        }
+                    });
+                });              
+
+
         $("#formuRegistro").validate({
             rules: {
                 usuario: { required: true, minlength: 4, maxlength: 25},
