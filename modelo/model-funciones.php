@@ -37,7 +37,7 @@ require_once('conexion.php');
 
 	}
 
-	public function RegistrarDisiplina($descripcion)
+	public function RegistrarDisciplina($descripcion)
 	{
 		$obj_conex = new Conexion();
 		$obj_conex->conectar();
@@ -54,6 +54,23 @@ require_once('conexion.php');
 		}
 	
 	}
+	public function verificarDisciplina($descripcion)
+	{
+		$obj_conex = new Conexion();
+		$obj_conex->conectar();
+		$query = pg_query("SELECT disciplina.descripcion
+							FROM public.disciplina
+							WHERE disciplina.descripcion='$descripcion';");
 
+		if($query)
+		{
+			return $query;
+		}
+		else
+		{
+			return false;
+		}
+	
+	}
 }
 ?>
