@@ -1,4 +1,54 @@
+<script type="text/javascript">
+                $(document).ready(function() {
+                    
+                var disci = function(){
 
+                    $.ajax({
+                            type: "POST",
+                            url: "../controlador/funciones.php?x=1",
+                            success: function(response)
+                            {
+                                $('#selector-disciplina select').html(response).fadeIn();
+                            }
+                    });
+                
+                };
+                disci();
+
+
+            
+            $("#formdisciplina").validate({
+            rules: {
+                nombre: { required: true, minlength: 4, maxlength: 25},
+            },
+            messages: {
+                nombre: {required: 'Debe introducir un nombre.', minlength: 'El mínimo permitido son 4 caracteres.', maxlength: 'El máximo permitido son 25 caracteres.'},
+            },
+            submitHandler: function(form){
+                $.ajax({
+                    type: "POST",
+                    url:"../controlador/funciones.php?x=2",
+                    data: $("#formdisciplina").serialize(),
+                    beforeSend:function(){
+                        $('#GuardarNombre').val('Guardando...');
+                    },
+                    success: function(data){
+                      $("#resp").html(data);
+                      $('#GuardarNombre').val('Guardar');
+                      disci();
+                    }
+                });
+                return false
+
+            }
+         });
+ 
+                });
+
+    $(document).on('click', '#agregarDis', function() {
+        $('#ModalAgregarDisciplina').modal('show');
+    });
+</script>
 
 <div class="container col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-offset-1 col-sm-10 col-xs-12 ">
 	<div class="tab-pane" id="participantes">
@@ -45,8 +95,8 @@
 </div>
 
 
-
-<div class="modal fade" role="dialog" id="agregar11">
+<!-- MODAL REGISTRO -->
+<div class="modal fade" role="dialog" id="agregar11" style="overflow-y: scroll;">
 	<div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -82,6 +132,16 @@
                                 </div>
                             </div>
                     <div class="form-group">
+                        <label class="control-label col-xs-3" for="sexo">Sexo:</label>
+                        <div class="col-xs-5">
+                            <select class="form-control" name="sexo" required>
+                                <option disabled selected>Seleccione</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-xs-3" for="carrera">Carrera:</label>
                         <div class="col-xs-5">
                           <select class="form-control" name="carrera" required>
@@ -96,19 +156,16 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-3" for="sexo">Sexo:</label>
-                        <div class="col-xs-5">
-                            <select class="form-control" name="sexo" required>
-                                <option disabled selected>Seleccione</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Femenino">Femenino</option>
-                            </select>
+                        <label class="control-label col-xs-3" for="carrera">Disciplina</label>
+                        <div class="col-xs-5" id="selector-disciplina">
+                            <select class="form-control" name="carrera" required></select>
                         </div>
+                        <button title="Agregar nueva disciplina" type="button" id="agregarDis" style="margin: 0px; background-color: transparent; border: none;"><img width="50" height="40" src="../vista/img/Plus_blue.svg"/></button>   
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-3">Correo:</label>
                             <div class="col-xs-9">
-                                <input type="Email" class="form-control" name="correo" placeholder="Correo electronico" required="">
+                                <input type="Email" class="form-control" name="correo" placeholder="Correo electronico" required>
                             </div>
                     </div>
                     <div class="form-group">
@@ -145,4 +202,38 @@
         </div>
 	</div>
 </div>
+
+
+
+<!-- MODAL DISCIPLINA -->
+    <div id="ModalAgregarDisciplina" class="modal fade" role="dialog"> 
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button class="close" aria-hidden="true" data-dismiss="modal">&times;</button> 
+                    <h3 class="modal-tittle">Agregar Disciplina</h3>
+                </div> 
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" id="formdisciplina" method="POST">
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Disciplina:</label>
+                            <div class="col-xs-5">
+                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                            </div>
+                        </div> 
+                
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-remove"></span><span class="hidden-xs"> Cerrar</span>
+                            </button>
+                            <button type="submit" id="GuardarNombre" name="GuardarNombre" class="btn btn-primary">
+                                <span class="fa fa-save"></span><span class="hidden-xs"> Guardar</span>
+                            </button>
+                        </div>
+                        <dir id="resp"></dir>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 

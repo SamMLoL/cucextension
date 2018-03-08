@@ -91,6 +91,15 @@
 
                 return false
 
+            },
+            errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                  if (placement) {
+                    $(placement).append(error)
+                  } else {
+                    var inputName = $(element).attr('name')
+                    $('#error-'+inputName).append(error)
+                  }
             }
          });
     });
