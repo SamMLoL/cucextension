@@ -8,10 +8,9 @@ if(array_key_exists('x', $_GET)){
 }
 
 switch ($x){
-//funcion SELECT
-
+//funcion SELECT DE DISCIPLINA
 	case 1:  
-    $obj_buscar = new participantes();
+    $obj_buscar = new objetos();
 	    $all= $obj_buscar->selectdis();
 	    echo '<option disabled value="0" selected>Seleccionar</option>';
 	    while ( $row = pg_fetch_assoc($all) )    
@@ -23,10 +22,11 @@ switch ($x){
 
 	break;
 
+//FUNCION AGREGAR DISCIPLINA
 	case 2: 
 
 			$descripcion = $_POST["nombre"];
-			$obj_registrar = new participantes();
+			$obj_registrar = new objetos();
             $validarDisciplina = $obj_registrar->verificarDisciplina($descripcion);
             $validar = pg_fetch_array($validarDisciplina);
 
@@ -46,12 +46,6 @@ switch ($x){
 
 			}
 			
-
-	break;
-
-	case 3: 
-
-					
 
 	break;
 

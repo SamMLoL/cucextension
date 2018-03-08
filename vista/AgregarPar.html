@@ -55,7 +55,7 @@
 
             <div class="modal-body">
                               
-                <form class="form-horizontal" action="../controlador/registrar.art.php" method="POST">
+                <form class="form-horizontal" action="../controlador/participante-control.php?x=1" method="POST">
                     <div class="form-group">
                         <label class="control-label col-xs-3">Cedula:</label>
                         <div class="col-xs-9">
@@ -105,9 +105,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-3" for="carrera">Disciplina</label>
+                        <label class="control-label col-xs-3" for="disciplina">Disciplina</label>
                         <div class="col-xs-5" id="selector-disciplina">
-                            <select class="form-control" name="carrera" required></select>
+                            <select class="form-control" name="id_disciplina" required></select>
                         </div>
                         <button title="Agregar nueva disciplina" type="button" id="agregarDis" style="margin: 0px; background-color: transparent; border: none;"><img width="50" height="40" src="../vista/img/Plus_blue.svg"/></button>   
                     </div>
@@ -126,7 +126,7 @@
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Ocupación:</label>
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" name="descripcion_art" placeholder="Ocupacion" required/>
+                            <input type="text" class="form-control" name="descripcion_part" placeholder="Ocupacion" required/>
                         </div>
                     </div>
                    

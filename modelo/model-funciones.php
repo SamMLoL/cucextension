@@ -2,12 +2,12 @@
 
 require_once('conexion.php');
 	
-	class participantes{
+	class objetos{
 
 	private $id_disciplina;
 	private $disciplina;
 	    
-	public  function participantes()
+	public  function objetos()
 	{
 		$this->id_disciplina="";
 		$this->disciplina="";
