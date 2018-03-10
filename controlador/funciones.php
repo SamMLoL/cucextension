@@ -46,6 +46,21 @@ switch ($x){
 
 			}
 			
+	break;
+
+//FUNCION Eliminar DISCIPLINA
+	case 3:
+			$id_disciplina = $_POST["id_disciplina"];
+			$obj_eliminar = new objetos();
+        	$eliminar = $obj_eliminar->EliminarDisciplina($id_disciplina);
+
+			if ($eliminar) {
+				echo "<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Eliminado!</strong> la disciplina ha sido ha eliminada exitosamente.</div>";
+			}
+			else {
+				echo "<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se pudo eliminar la disciplina, la disciplina puede tener registros que no se pueden borrar</div>";
+			}
+
 
 	break;
 

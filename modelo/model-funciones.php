@@ -72,5 +72,27 @@ require_once('conexion.php');
 		}
 	
 	}
+
+	public function EliminarDisciplina($id_disciplina)
+	{
+		$conex = new Conexion();
+		$conex->conectar();
+
+		$sql = "DELETE FROM public.disciplina WHERE id_disciplina='$id_disciplina'";
+
+		$query = @pg_query($sql);
+
+		if ($query)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+
 }
 ?>
