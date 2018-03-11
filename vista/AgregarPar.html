@@ -1,8 +1,8 @@
-<script src="../vista/js/jqselect.js"></script>
+<script src="../vista/js/funciones.js"></script>
 <div class="container col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-offset-1 col-sm-10 col-xs-12 ">
 	<div class="tab-pane" id="participantes">
 		<div class="row">
-			<div class="col-md-9 col-sm-9 col-xs-9 tab-content" data-spy="scroll" data-target="#menu" data_offset="0">
+			<div class="col-md-9 col-sm-9 col-xs-6 tab-content" data-spy="scroll" data-target="#menu" data_offset="0">
 				<div class=" tab-pane in active" id="id1">	
 					<div class="panel panel-primary tab-pane" id="ad1">
 						<div class="panel-heading">Agregar</div>
@@ -55,29 +55,29 @@
 
             <div class="modal-body">
                               
-                <form class="form-horizontal" action="../controlador/participante-control.php?x=1" method="POST">
+                <form class="form-horizontal" id="formuParticipante" action="../controlador/participante-control.php?x=1" method="POST">
                     <div class="form-group">
                         <label class="control-label col-xs-3">Cedula:</label>
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" name="cedula" placeholder="Cedula" pattern="[0-9]{8}" required>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" name="cedula" placeholder="Cedula">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-3">Nombre:</label>
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" name="nombre" placeholder="Nombre" required>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" name="nombre" placeholder="Nombre" >
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-3">Apellido:</label>
-                            <div class="col-xs-9">
-                                <input type="text" class="form-control" name="apellido" placeholder="Apellido" required>
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control" name="apellido" placeholder="Apellido">
                             </div>
                     </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-3">Edad:</label>
-                                 <div class="col-xs-9">
-                                    <input type="number" class="form-control" name="edad" placeholder="edad"  maxlength="2" max="99" min="10" required/>
+                                 <div class="col-xs-6">
+                                    <input class="form-control" name="edad" placeholder="edad"/>
                                 </div>
                             </div>
                     <div class="form-group">
@@ -106,36 +106,36 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-3" for="disciplina">Disciplina</label>
-                        <div class="col-xs-5" id="selector-disciplina">
+                        <div id="selector-disciplina" class="col-xs-5">
                             <select class="form-control" name="id_disciplina" required></select>
                         </div>
-                        <div class="btn-group" role="group" aria-label="...">
-                            <button title="Agregar nueva disciplina" type="button" id="agregarDis" style="margin: 0px; background-color: transparent; border:1px none;"><img width="35" height="35" src="../vista/img/Plus_blue.png"/></button>
-                            <button title="Eliminar la disciplina" type="button" id="eliminarDis" style="margin: 0px; background-color: transparent; border:1px none;"><img width="35" height="35" src="../vista/img/icono-eliminar.png"/></button>  
+                        <div class="btn-group" role="group">
+                            <button title="Agregar nueva disciplina" class=" col-md-4" type="button" id="agregarDis" style="margin: 0px; background-color: transparent; border:1px none;"><img width="35" height="35" src="../vista/img/Plus_blue.png"/></button>
+                            <button title="Eliminar una disciplina" class="col-md-4" type="button" id="eliminarDis" style="margin: 0px; background-color: transparent; border:1px none;"><img width="35" height="35" src="../vista/img/icono-eliminar.png"/></button>  
                         </div>
                         
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-3">Correo:</label>
-                            <div class="col-xs-9">
-                                <input type="Email" class="form-control" name="correo" placeholder="Correo electronico" required>
+                            <div class="col-xs-6">
+                                <input class="form-control" name="correo" placeholder="Correo electronico">
                             </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Telefono:</label>
-                            <div class="col-xs-9">
-                                <input type="tel" class="form-control" name="telefono" placeholder="Telefono" pattern="[0-9]{11}" required>
+                            <div class="col-xs-6">
+                                <input class="form-control" name="telefono" placeholder="Telefono">
                             </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Ocupación:</label>
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" name="descripcion_part" placeholder="Ocupacion" required/>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" name="descripcion_part" placeholder="Ocupacion"/>
                         </div>
                     </div>
                    
                     <div class="form-group">
-                        <label class="control-label col-xs-3" for="disciplina">Estatus:</label>
+                        <label class="control-label col-xs-3" for="status">Estatus:</label>
                         <div class="col-xs-5">
                             <select class="form-control" name="status" required>
                                 <option disabled selected>Seleccione</option>
@@ -147,6 +147,7 @@
                     </div>          
                         
                     <div class="modal-footer">
+                        <div id="respRegistro"></div>
                         <button type="submit" class="btn btn-primary">Registrar</button>
                         <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     </div>
@@ -213,7 +214,7 @@
                                 <span class="glyphicon glyphicon-remove"></span><span class="hidden-xs"> Cerrar</span>
                             </button>
                             <button type="submit" id="EliminarNombre" name="EliminarNombre" class="btn btn-danger" onclick="return confirm('¿Estas seguro que quieres eliminar esta disciplina?')">
-                                <span class="glyphicon glyphicon-trash"></span><span class="hidden-xs">Eliminar</span>
+                                <span class="glyphicon glyphicon-trash"></span><span class="hidden-xs"> Eliminar</span>
                             </button>
                         </div>
                         <dir id="resp"></dir>

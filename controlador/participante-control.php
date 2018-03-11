@@ -28,10 +28,11 @@ switch ($x){
 
 		if ($crear) {
 
-			echo "el usuario ha sido registrado";
+			echo "ok";
+
 			
 		}else {
-			echo "Error al cargar";
+			echo "error";				
 		}
 
 	break;

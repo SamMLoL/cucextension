@@ -16,7 +16,7 @@ if(array_key_exists('x', $_GET)){
 }
 
 switch ($x){
-//fuinciones de PARTICIPANTES 
+//funciones de PARTICIPANTES 
 	case 1:  
 		$html = file_get_contents('../vista/v2.html');
 		echo $html; 
