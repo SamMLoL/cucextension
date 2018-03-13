@@ -1,4 +1,5 @@
 <script src="../vista/js/funciones.js"></script>
+<script src="../vista/js/mostrarP.js"></script>
 <div class="container">
     <div class="row">
         <div class= col-xs-9 tab-content" data-spy="scroll" data-target="#menu" data_offset="0">
@@ -8,73 +9,67 @@
                     <br><br>
                     <div class="container">
                         <form class="form-horizontal" id="formuModificar" method="POST">
-                            <input type="hidden" name="id_artista" value="">
+                            <input type="hidden" name="id_participante" value="">
                             <div class="form-group">
                                 <label class="control-label col-xs-4">Cedula:</label>
                                     <div class="col-xs-2">
-                                    <input type="text" required name="cedula" value="">
+                                    <input type="text" required name="cedula" id="cedula" value="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-4">Nombre:</label>
                                 <div class="col-xs-2">
-                                    <input type="text" required name="nombre" value="">
+                                    <input type="text" required name="nombre" id="nombre" value="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-4">Apellido:</label>
                                 <div class="col-xs-4">
-                                    <input type="text" required name="apellido" value="">
+                                    <input type="text" required name="apellido" id="apellido" value="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-4">Edad:</label>
                                 <div class="col-xs-4">
-                                    <input type="text" required name="edad" value="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-xs-4" for="carrera">Carrera:</label>
-                                <div class="col-xs-4">
-                                  <input type="text" required name="carrera" value="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-xs-4" >Telefono:</label>
-                                <div class="col-xs-4">
-                                    <input type="text" required name="telefono" value="">
+                                    <input type="text" required name="edad" id="edad" value="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-4" for="sexo">Sexo:</label>
                                 <div class="col-xs-4">
-                                    <input type="text" required name="sexo" value="">
+                                    <input type="text" required name="sexo" id="sexo" value="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-4">Correo:</label>
                                 <div class="col-xs-4">
-                                    <input type="text" required name="correo" value="">
+                                    <input type="text" required name="correo" id="correo" value="">
+                                </div>
+                            </div>                            
+                            <div class="form-group">
+                                <label class="control-label col-xs-4" for="carrera">Carrera:</label>
+                                <div class="col-xs-4">
+                                  <input type="text" required name="carrera" id="carrera" value="">
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-xs-4" >Telefono:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" required name="telefono" id="telefono" value="">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
                                 <label class="control-label col-xs-4">Ocupacion</label>
                                 <div class="col-xs-4">
-                                    <input type="text" required name="descripcion_art" value="">
+                                    <input type="text" required name="descripcion_part" id="descripcion_part" value="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-4" for="disciplina">Disciplina:</label>
                                 <div class="col-xs-2"> 
                                     <select class="form-control" name="id_disciplina" required>
-                                    </select>
-                                </div>
-                            </div>
-                           <div class="form-group">
-                                <label class="control-label col-xs-4" for="Equipo_o_Club">Equipo o Club:</label>
-                                <div class="col-xs-2"> 
-                                    <select class="form-control" name="id" required> 
-
                                     </select>
                                 </div>
                             </div>

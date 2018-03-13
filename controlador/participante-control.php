@@ -48,10 +48,20 @@ switch ($x){
 
 //FUNCION MODIFICAR/ BUSCAR
 	case 2: 
-	$cedula=$_GET['cedula1'];
+ 	$cedula = $_GET['cedula1'];
+	echo $cedula;
 
-	echo "cedula";
+	break;
 
+	case 3: 
+		$datos = new stdClass();
+		$cedula= $_GET['cedula'];
+
+		$obj_mostrar = new participante();
+		$mostrarParticipante = $obj_mostrar->MostrarParticipante($cedula);
+		$datos = pg_fetch_object($mostrarParticipante);
+
+	  echo json_encode($datos);
 	break;
 
 	

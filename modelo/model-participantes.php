@@ -65,6 +65,49 @@ class participante{
 	
 	}
 
+	public function ConsultarID($cedula)
+	{
+		$obj_conex = new conexion();
+		$obj_conex->conectar();
+		$query = pg_query("SELECT 
+	 	participantes.id
+	FROM 
+  		public.participantes 
+	WHERE 
+
+  			participantes.cedula='$cedula';  ");		
+	
+		if(pg_num_rows($query)>0){
+			return $query;
+		}
+		else
+		{
+
+			return false;
+		}
+
+	}
+
+	public function MostrarParticipante($cedula)
+	{
+		$obj_conex = new conexion();
+		$obj_conex->conectar();
+		$query = pg_query("SELECT *
+		FROM 
+  			public.participantes
+ 		WHERE
+  			participantes.cedula='$cedula';");		
+	
+		if(pg_num_rows($query)>0){
+			return $query;
+		}
+		else
+		{
+
+			return false;
+		}
+
+	}
 
 
 }
