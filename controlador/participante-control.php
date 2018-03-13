@@ -23,23 +23,34 @@ switch ($x){
 		$status = $_POST['status'];
 
 		$obj_registrar = new participante();
-		$crear = $obj_registrar->RegistrarParticipante($cedula,$nombre,$apellido,$edad,$sexo,$carrera,$correo,$telefono,$descripcion_part,$id_disciplina,$status);
+		$validarParticipante = $obj_registrar->verificarParticipante($cedula);
+		$validar = pg_fetch_array($validarParticipante);
+
+		if ($validar==0) {
+
+			$crear = $obj_registrar->RegistrarParticipante($cedula,$nombre,$apellido,$edad,$sexo,$carrera,$correo,$telefono,$descripcion_part,$id_disciplina,$status);
 
 
-		if ($crear) {
+			if ($crear) {
 
-			echo "ok";
+				echo $cedula;
 
 			
-		}else {
-			echo "error";				
+			}else {
+				echo "error";				
+			}
 		}
-
+		else {
+			echo "error";
+		}
+		
 	break;
 
-//FUNCION 
+//FUNCION MODIFICAR/ BUSCAR
 	case 2: 
-			
+	$cedula=$_GET['cedula1'];
+
+	echo "cedula";
 
 	break;
 

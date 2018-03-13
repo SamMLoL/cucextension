@@ -29,28 +29,24 @@ switch ($x){
 	$html = file_get_contents('../vista/ConsultarPar.html');
 	echo $html; 
 	break;
-// Funciones de Profesores
 	case 4: 
+	$html = file_get_contents('../vista/MostrarPar.html');
+	echo $html; 
+	break;
+
+	
+// Funciones de Profesores
+	case 9: 
 	$html = file_get_contents('../vista/v3.html');
 	echo $html; 
 	break;
-	case 5: 
+	case 10: 
 	$html = file_get_contents('../vista/agregarPro.html');
 	echo $html; 
 	break;
-	case 6: 
+	case 11: 
 	$html = file_get_contents('../vista/ConsultarPro.html');
 	echo $html; 
-	break;
-	case 7: 
-			session_start();
-
-			unset($_SESSION);
-
-			session_destroy();
-
-			header("Location: ../vista/inicio.html");
-			die();
 	break;
 
 	default: 

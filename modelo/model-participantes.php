@@ -46,6 +46,25 @@ class participante{
 		}
 	}
 
+		public function verificarParticipante($cedula)
+	{
+		$obj_conex = new Conexion();
+		$obj_conex->conectar();
+		$query = pg_query("SELECT participantes.cedula
+							FROM public.participantes
+							WHERE participantes.cedula='$cedula';");
+
+		if($query)
+		{
+			return $query;
+		}
+		else
+		{
+			return false;
+		}
+	
+	}
+
 
 
 }

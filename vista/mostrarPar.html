@@ -1,0 +1,117 @@
+<script src="../vista/js/funciones.js"></script>
+<div class="container">
+    <div class="row">
+        <div class= col-xs-9 tab-content" data-spy="scroll" data-target="#menu" data_offset="0">
+            <div class=" tab-pane in active" id="cd2">  
+                <div class="panel panel-success tab-pane" id="cd2" >
+                    <div class="panel-heading"><center>Participante</center></div>
+                    <br><br>
+                    <div class="container">
+                        <form class="form-horizontal" id="formuModificar" method="POST">
+                            <input type="hidden" name="id_artista" value="">
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">Cedula:</label>
+                                    <div class="col-xs-2">
+                                    <input type="text" required name="cedula" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">Nombre:</label>
+                                <div class="col-xs-2">
+                                    <input type="text" required name="nombre" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">Apellido:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" required name="apellido" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">Edad:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" required name="edad" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-4" for="carrera">Carrera:</label>
+                                <div class="col-xs-4">
+                                  <input type="text" required name="carrera" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-4" >Telefono:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" required name="telefono" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-4" for="sexo">Sexo:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" required name="sexo" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">Correo:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" required name="correo" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">Ocupacion</label>
+                                <div class="col-xs-4">
+                                    <input type="text" required name="descripcion_art" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-4" for="disciplina">Disciplina:</label>
+                                <div class="col-xs-2"> 
+                                    <select class="form-control" name="id_disciplina" required>
+                                    </select>
+                                </div>
+                            </div>
+                           <div class="form-group">
+                                <label class="control-label col-xs-4" for="Equipo_o_Club">Equipo o Club:</label>
+                                <div class="col-xs-2"> 
+                                    <select class="form-control" name="id" required> 
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-4" for="estatus">Estatus:</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" name="status" required>
+                                        <option value="f">Inactivo</option>
+                                        <option value="t">Activo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="control-label col-xs-6">
+                                    <button class="btn btn-primary"  type="submit">Guardar</button>
+                                    <button class="btn btn-danger" type="button" onclick= "self.location.href = '../controlador/index.php?x=3'">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="col-md-3 col-sm-3 col-xs-4">
+                <ul class="nav flex-column">
+                    <h4>Opciones</h4>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.php?x=1">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?x=2">Agregar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?x=3">Consultar</a>
+                    </li>
+                </ul>
+            </div>
+    </div>
+</div>
+

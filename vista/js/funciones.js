@@ -144,20 +144,21 @@
                         success: function(data){
                           $('#registrar').val('Registrar');
 
-                            if (data=="ok") {
+                            if (data == "error") {
 
-                                alert("El participante ha sido registrado con exito");
-                                $(location).attr('href','../controlador/index.php');
-                            } 
-                            else {
-                                $("#respRegistro").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se logro registrar el participante, verifique que los datos sean correctos.</div>");
+                                $("#respRegistro").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se logro registrar el participante, la cedula puede estar ya registrada</div>");
                             }
+                            else {                         
+                                alert("El participante ha sido registrado con exito");
+                                $(location).attr('href','../controlador/index.php?x=4&cedula='+data);
+                           }
                         }
                     });
 
                     return false
                 }
-         });
+            });
+
     });
 
 
@@ -235,8 +236,101 @@
 
                 }
             });
+
+        $("#formubuscar").validate({
+            rules: {
+                cedula1: { required: true, digits: true, minlength: 7, maxlength: 9}
+            },
+            messages: {
+               
+               cedula1: 'Debe instroducir una cedula valida.',
+            },
+            submitHandler: function(form){
+                $.ajax({
+                    type: "GET",
+                    url:"../controlador/participante-control.php?x=2",
+                    data: $("#formubuscar").serialize(),
+                    beforeSend:function(){
+                        $('#buscarPart').val('Buscando...');
+                    },
+                    success: function(data){
+                        if (data!=0) {
+                            $(location).attr('href','../controlador/index.php?x=4&cedula='+data);
+                        } else {
+                            $("#respbuscar").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> Cedula incorrecta.</div>");
+                            $('#buscarPart').val('Buscar Participante');
+                        }
+
+                    }
+                });
+
+                return false
+
+            },
+         });
+
+
+                $("#formuModificar").validate({
+                rules: {
+                    cedula: { required: true, digits: true, minlength: 7, maxlength: 9},
+                    nombre:  { required: true, minlength: 4, maxlength: 25},
+                    apellido: { required: true, minlength: 4, maxlength: 25},
+                    edad: { required: true, digits: true},
+                    sexo: { required: true},
+                    carrera: { required: true},
+                    id_disciplina: { required: true},
+                    correo: { required:true, email: true, minlength: 13, maxlength: 50},
+                    telefono: { required: true, digits:true, minlength: 4, maxlength: 25},
+                    descripcion_part: { required: true, minlength: 4, maxlength: 40},
+                    status: { required: true}
+
+                },
+                messages: {
+                    cedula: "Debe instroducir una cedula valida",
+                    nombre: {required: 'Debe introducir un nombre.' , minlength: 'El mínimo permitido son 4 caracteres.', maxlength: 'El máximo permitido son 25 caracteres.'},
+                    apellido: {required: 'Debe introducir el apellido.', minlength: 'El mínimo permitido son 4 caracteres.', maxlength: 'El máximo permitido son 25 caracteres.'},
+                    edad: "Debe instroducir una edad valida",
+                    sexo: "Debe seleccionar un sexo",
+                    carrera: "Debe seleccionar una carrera",
+                    id_disciplina: "Debe seleccionar una disciplina.",
+                    correo : "Debe introducir un email válido.",
+                    telefono: "Debe introducir un telefono valido.",
+                    descripcion_part: {required: 'Debe introducir una descripcion.', minlength: 'El mínimo permitido son 4 caracteres.', maxlength: 'El máximo permitido son 40 caracteres.'},
+                    status: "Debe seleccionar un estatus",
+
+                },
+                submitHandler: function(form){
+                    $.ajax({
+                        type: "POST",
+                        url:"../controlador/participante-control.php?x=1",
+                        data: $("#formuModificar").serialize(),
+                        beforeSend:function(){
+                            $('#registrar').val('Conectando...');
+                        },
+                        success: function(data){
+                            console.log(status);
+                          $('#registrar').val('Registrar');
+
+                            if (data == "error") {
+
+                                $("#respRegistro").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se logro registrar el participante, la cedula puede estar ya registrada</div>");
+                            }
+                            else {                         
+                                alert("El participante ha sido registrado con exito");
+                                $(location).attr('href','../controlador/index.php?x=4&cedula='+data);
+                           }
+                        }
+                    });
+
+                    return false
+                }
+            });
+
+
+
  
     });
+
 
     $(document).on('click', '#agregarDis', function() {
         $('#ModalAgregarDisciplina').modal('show');

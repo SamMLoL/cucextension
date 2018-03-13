@@ -93,6 +93,18 @@ switch ($x){
 					
 
 	break;
+	case 4: 
+			session_start();
+
+			unset($_SESSION);
+
+			session_destroy();
+
+			header("Location: ../vista/inicio.html");
+			die();
+					
+
+	break;
 
 	default: 
 		$html = file_get_contents('../vista/inicio.html');
