@@ -109,6 +109,34 @@ class participante{
 
 	}
 
+	public function ModificarParticipante($id, $cedula,$nombre,$apellido,$edad,$sexo,$carrera,$correo,$telefono,$descripcion_part,$id_disciplina,$status)
+	{
+
+		$obj_conex = new conexion();
+		$obj_conex->conectar();
+
+		$sql = "UPDATE participantes
+  		SET nombre='$nombre', cedula='$cedula', 
+      	apellido='$apellido', edad='$edad', carrera='$carrera',
+      	correo='$correo', telefono='$telefono', 
+      	descripcion_part='$descripcion_part', id_disciplina='$id_disciplina', 
+      	status='$status'
+		WHERE id='$id';";
+
+		$query = pg_query($sql);
+
+		if ($query) 
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
+	
+	}
+
 
 }
 ?>

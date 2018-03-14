@@ -48,8 +48,15 @@ switch ($x){
 
 //FUNCION MODIFICAR/ BUSCAR
 	case 2: 
- 	$cedula = $_GET['cedula1'];
-	echo $cedula;
+	$cedula=$_GET['cedula1'];
+
+	$obj_buscar = new participante();
+	$buscarParticipante = $obj_buscar->verificarParticipante($cedula);
+	$validar = pg_fetch_array($buscarParticipante);
+	if ($validar) {
+		echo $cedula;
+	}	
+	
 
 	break;
 
@@ -60,11 +67,34 @@ switch ($x){
 		$obj_mostrar = new participante();
 		$mostrarParticipante = $obj_mostrar->MostrarParticipante($cedula);
 		$datos = pg_fetch_object($mostrarParticipante);
-
 	  echo json_encode($datos);
 	break;
+	case 4: 
+		$id= $_POST["id"];
+		$cedula = $_POST["cedula"];
+		$nombre = $_POST['nombre'];
+		$apellido = $_POST['apellido'];
+		$edad = $_POST['edad'];
+		$sexo = $_POST['sexo'];
+		$carrera = $_POST['carrera'];
+		$id_disciplina = $_POST['id_disciplina'];
+		$correo = $_POST['correo'];
+		$telefono = $_POST['telefono'];
+		$descripcion_part = $_POST['descripcion_part'];
+		$status = $_POST['status'];
 
+		$obj_modificar = new participante();
+		$modificar= $obj_modificar->ModificarParticipante($id, $cedula,$nombre,$apellido,$edad,$sexo,$carrera,$correo,$telefono,$descripcion_part,$id_disciplina,$status);
+
+		if ($modificar) {
+			echo "ok";
+		}
+		else{
+			echo "error";
+		}
+	break;
 	
+
 	}
 
 ?>

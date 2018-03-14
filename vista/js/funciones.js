@@ -75,11 +75,12 @@
                         $('#login').val('Conectando...');
                     },
                     success: function(data){
-                        $('#login').val('ingresar');
+                        
                         if (data=="ok") {
                             $(location).attr('href','../controlador/index.php');
                         } else {
                             $("#respuestalogin").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> Usuario o contraseña incorrectas.</div>");
+                            $('#login').val('ingresar');
                         }
 
                     }
@@ -164,8 +165,6 @@
 
 
 
-
-
  $(document).ready(function() {
         
         var disci = function(){
@@ -176,11 +175,13 @@
                     success: function(response)
                     {
                         $('#selector-disciplina select').html(response).fadeIn();
+                        mostrar();
                     }
             });
-
+            return false
         };
         disci();
+
 
             
             $("#formdisciplina").validate({
@@ -268,13 +269,6 @@
 
             },
          });
-
-
-
-
-
-
-
 
  
     });
