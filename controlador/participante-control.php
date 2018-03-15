@@ -93,6 +93,35 @@ switch ($x){
 			echo "error";
 		}
 	break;
+
+	case 5: 
+	$obj_participantes = new participante();
+	$todos = $obj_participantes->MostrarTodos();
+	if (!$todos) {
+		die("error");
+	}
+	else{
+		while ($data = pg_fetch_assoc($todos)) {
+			$array["data"][]= $data;
+		};
+		echo json_encode($array);
+	}
+
+
+	break;
+	case 6:
+	$id=$_POST['id'];
+	$obj_eliminar = new participante();
+	$eliminar = $obj_eliminar->EliminarParticipante($id);
+
+	if ($eliminar) {
+		echo "ok";
+	}
+	else{
+		echo "error";
+	}
+
+	break;
 	
 
 	}

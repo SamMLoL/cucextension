@@ -1,0 +1,102 @@
+
+<script src="../vista/js/underscore-min.js"></script>
+<script src="../vista/js/calendar.js"></script>
+<script type="text/javascript" src="../vista/js/funcionesEvent.js"></script>
+ <div class="container">
+                <div class="row">
+                        <div class="page-header"><h2></h2></div>
+                                <div class="pull-left form-inline"><br>
+                                        <div class="btn-group">
+                                            <button class="btn btn-primary" data-calendar-nav="prev"><< Anterior</button>
+                                            <button class="btn" data-calendar-nav="today">Hoy</button>
+                                            <button class="btn btn-primary" data-calendar-nav="next">Siguiente >></button>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class="btn btn-warning" data-calendar-view="year">Año</button>
+                                            <button class="btn btn-warning active" data-calendar-view="month">Mes</button>
+                                            <button class="btn btn-warning" data-calendar-view="week">Semana</button>
+                                            <button class="btn btn-warning" data-calendar-view="day">Dia</button>
+                                        </div>
+
+                                </div>
+                                    <div class="pull-right form-inline"><br>
+                                        <button type="button" class="btn btn-info" data-toggle='modal' data-target='#add_evento'>Añadir Evento</button>
+                                    </div>
+
+                </div><hr>
+
+                <div class="row">
+                        <div id="calendar"></div> <!-- Aqui se mostrara nuestro calendario -->
+                        <br><br>
+                </div>
+
+                <!--ventana modal para el calendario-->
+                <div class="modal fade" id="events-modal1">
+                    <div class="modal-dialog">
+                            <div class="modal-content">
+                                    <div class="modal-body" style="height: 400px">
+                                        <p>One fine body&hellip;</p>
+                                    </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+        </div>
+
+
+<div div class="modal" id="add_evento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Agregar nuevo evento</h4>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+                    <label for="from">Inicio</label>
+                    <div class='input-group date' id='from'>
+                        <input type='text' id="from" name="from" class="form-control" readonly />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+
+                    <br>
+
+                    <label for="to">Final</label>
+                    <div class='input-group date' id='to'>
+                        <input type='text' name="to" id="to" class="form-control" readonly />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+
+                    <br>
+
+                    <label for="tipo">Tipo de evento</label>
+                    <select class="form-control" name="class" id="class">
+                        <option value="event-info">Informativo</option>
+                        <option value="event-success">Deportivo</option>
+                        <option value="event-important">Artistico</option>
+                        <option value="event-warning">Cultural</option>
+                        <option value="event-special">Especial</option>
+                    </select>
+
+                    <br>
+
+
+                    <label for="title">Título</label>
+                    <input type="text" required autocomplete="off" name="title" class="form-control" id="title" placeholder="Introduce un título" />
+
+                    <br>
+
+
+                    <label for="body">Descripcion</label>
+                    <textarea id="body" name="event" required class="form-control" rows="3"></textarea>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
+          <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Agregar</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</div>

@@ -26,20 +26,27 @@ switch ($x){
 		echo $html; 
 	break;
 	case 3: 
-	$html = file_get_contents('../vista/ConsultarPar.html');
-	echo $html; 
+		$html = file_get_contents('../vista/ConsultarPar.html');
+		echo $html; 
 	break;
 	case 4: 
-	$html = file_get_contents('../vista/MostrarPar.html');
-	echo $html; 
+		$html = file_get_contents('../vista/MostrarPar.html');
+		echo $html; 
+	break;
+	case 5:
+		$html = file_get_contents('../vista/listaparticipantes.html');
+		echo $html; 
 	break;
 
 	
-// Funciones de Profesores
-	case 9: 
-	$html = file_get_contents('../vista/v3.html');
+// Funciones de Eventos
+	case 6: 
+	$html = file_get_contents('../vista/evento.html');
 	echo $html; 
 	break;
+
+
+
 	case 10: 
 	$html = file_get_contents('../vista/agregarPro.html');
 	echo $html; 

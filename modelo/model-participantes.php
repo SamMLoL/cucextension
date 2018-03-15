@@ -133,8 +133,60 @@ class participante{
 		{
 			return false;
 		}
+	}
+	public function MostrarTodos()
+	{
+		$conex = new Conexion();
+		$conex->conectar();
 
-	
+		$query = pg_query("SELECT 
+		  participantes.nombre, 
+		  participantes.edad, 
+		  participantes.sexo, 
+		  participantes.telefono, 
+		  participantes.descripcion_part, 
+		  participantes.correo, 
+		  participantes.status, 
+		  participantes.cedula, 
+		  participantes.apellido, 
+		  participantes.carrera, 
+		  participantes.id, 
+		  disciplina.descripcion
+		FROM 
+		  public.participantes, 
+		  public.disciplina
+  		WHERE 
+  		  participantes.id_disciplina = disciplina.id_disciplina
+ 		ORDER BY
+  		  participantes.cedula ASC;");
+
+		if ($query) 
+		{
+			return $query;			
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function EliminarParticipante($id)
+	{
+		$conex = new Conexion();
+		$conex->conectar();
+
+		$sql = "DELETE FROM public.participantes WHERE id='$id'";
+
+		$query = pg_query($sql);
+
+		if ($query)
+		{
+			return $query;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 
