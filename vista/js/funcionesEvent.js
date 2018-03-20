@@ -106,16 +106,43 @@
 
 
         $(function () {
-            $('#from').datetimepicker({
-                language: 'es',
-                minDate: new Date()
-            });
-            $('#to').datetimepicker({
+
+
+           /* $('#from').datetimepicker({
                 language: 'es',
                 minDate: new Date()
             });
 
+            $('#to').datetimepicker({
+                language: 'es',
+                minDate: new Date()
+            }); 
+                */
+
+        $('#from').datetimepicker({
+            format: 'MM/DD/YYYY HH:mm:ss',
+            minDate: new Date()
         });
+        $('#to').datetimepicker({
+            format: 'MM/DD/YYYY HH:mm:ss',
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#from").on("dp.change", function (e) {
+            $('#to').data("DateTimePicker").minDate(e.date);
+        });
+        $("#to").on("dp.change", function (e) {
+            $('#from').data("DateTimePicker").maxDate(e.date);
+        });
+
+
+        });
+
+
+
+
+
+
+
 
         function getParameterByName(name) {
             name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -128,10 +155,69 @@
         
         function mostrarboton(){
             if (x==6) {
-                $("#boton").html("<div class='pull-right form-inline'><button class='btn btn-info' data-toggle='modal' data-target='#add_evento'>Añadir Evento</button></div>");
+                $("#boton").html("<div class='pull-right form-inline'><button class='btn btn-info' data-toggle='modal'style=\"width:150px; height:35px;\" data-target='#add_evento'>Añadir Evento</button><br><br><button class='btn btn-danger' style=\"width:150px; height:35px;\" data-toggle='modal' data-target='#EliminarEvento'>Eliminar Evento</button></div>");
             }
 
         };
 
-        mostrarboton();
+        
 
+
+$(document).ready(function(){
+    mostrarboton();
+
+        $("#formuEventos").validate({
+                rules: {
+                    from: { required: true},
+                    to:  { required: true},
+                    class: { required: true},
+                    title: { required: true, minlength: 4, maxlength: 100},
+                    id_disciplina: {required: true},
+                    event: { required: true, minlength: 4, maxlength: 100}
+
+                },
+                messages: {
+                    from: "Debe instroducir una fecha valida",
+                    to: "Debe instroducir una fecha valida",
+                    class: "Debe selecciona un tipo de evento",
+                    title: "Debe introducir un titulo valido.",
+                    id_disciplina: "Debe seleccionar una disciplina",
+                    event:{required: 'Debe introducir una descripcion.', minlength: 'El mínimo permitido son 4 caracteres.', maxlength: 'El máximo permitido son 100 caracteres.'},
+
+                },
+                submitHandler: function(form){
+                    $.ajax({
+                        type: "POST",
+                        url:"../controlador/funciones.php?x=4",
+                        data: $("#formuEventos").serialize(),
+                        beforeSend:function(){
+                        $('#AgregarEvento').val('Conectando...');
+                        },
+                        success: function(data){
+
+                            if (data=="ok") {
+                                alert("El evento ha sido agregado con exito");
+                                $(location).attr('href','../controlador/index.php?x=6');
+                            } 
+                            else {    
+                                $("#resEvento").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se logro registrar el evento, verifique los datos ingresados.</div>");
+                                                 
+                                
+
+                            }
+                        }
+                    });
+
+                    return false
+                },
+                errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                  if (placement) {
+                    $(placement).append(error)
+                  } else {
+                    var inputName = $(element).attr('name')
+                    $('#error-'+inputName).append(error)
+                  }
+            }
+            });
+});

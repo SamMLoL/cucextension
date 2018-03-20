@@ -15,7 +15,7 @@ require_once('conexion.php');
 	private $final_normal;
 	private $url;
 	private $id_unidad;
-
+ 
 	    
 	public  function objetos()
 	{
@@ -111,28 +111,24 @@ require_once('conexion.php');
 		}
 	}
 
-		public function AgregarEvento($titulo,$contenido,$clase,$inicio,$final,$inicio_normal,$final_normal)
+		public function AgregarEvento($titulo,$contenido,$clase,$inicio,$final,$id_disciplina,$inicio_normal,$final_normal)
 	{
 		$conex = new Conexion();
 		$conex->conectar();
 
-		$sql="INSERT INTO public.evento(title, body, class, start, \"end\", inicio_normal, final_normal)
-                VALUES ('$titulo','$contenido','$clase','$inicio','$final','$inicio_normal','$final_normal');";
+		$sql="INSERT INTO public.evento(title, body, class, start, \"end\", inicio_normal, id_disciplina, final_normal)
+                VALUES ('$titulo','$contenido','$clase','$inicio','$final','$inicio_normal','$id_disciplina','$final_normal');";
 
-		$query = @pg_query($sql);
+		$query = pg_query($sql);
 
 		if ($query)
 		{	
 			$im=$obj_conex=pg_query("SELECT MAX(id) AS id FROM evento");
             $row = pg_fetch_row($im);  
             $id = trim($row[0]);
-
             $link = "../controlador/funciones.php?x=5&id=$id";
-
             $query="UPDATE evento SET url = '$link' WHERE id = $id";
-
             $obj_conex=pg_query($query);
-
 			return true;
 		}
 		else

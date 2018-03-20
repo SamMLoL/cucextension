@@ -66,45 +66,47 @@ switch ($x){
 	//FUNCIONES EVENTOS
 	case 4:
 
-	if ($_POST['from']!="" AND $_POST['to']!="") 
-    {
-
-        $Datein = date('d/m/Y H:i:s', strtotime($_POST['from']));
-        $Datefi  = date('d/m/Y H:i:s', strtotime($_POST['to']));
-
+        if ($_POST['from']!="" AND $_POST['to']!="") 
+        {
+$Datein                    = date('d/m/Y H:i:s', strtotime($_POST['from']));
+$Datefi                    = date('d/m/Y H:i:s', strtotime($_POST['to']));
         $inicio = _formatear($Datein);
+        // y la formateamos con la funcion _formatear
 
         $final  = _formatear($Datefi);
 
+        // Recibimos el fecha de inicio y la fecha final desde el form
         $orderDate                      = date('d/m/Y H:i:s', strtotime($_POST['from']));
         $inicio_normal = $orderDate;
 
+        // y la formateamos con la funcion _formatear
         $orderDate2                      = date('d/m/Y H:i:s', strtotime($_POST['to']));
         $final_normal  = $orderDate2;
 
-        $titulo = evaluar($_POST['title']);
+            $titulo = evaluar($_POST['title']);
 
-        $contenido  = evaluar($_POST['event']);
+            $contenido  = evaluar($_POST['event']);
+            $id_disciplina  = evaluar($_POST['id_disciplina']);
+            $clase  = evaluar($_POST['class']);
 
-        $clase  = evaluar($_POST['class']);
 
 
 
             $obj_evento = new objetos();
-            $evento = $obj_evento->AgregarEvento($titulo,$contenido,$clase,$inicio,$final,$inicio_normal,$final_normal);
+            $evento = $obj_evento->AgregarEvento($titulo,$contenido,$clase,$inicio,$final,$id_disciplina,$inicio_normal,$final_normal);
 
 
             if ($evento) {
-                echo "<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Registrado!</strong> El evento se registro con exito.</div>";
+                echo "ok";
 
             }
             else {
-                echo "<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se pudo registrar el evento, verifique los datos ingresados.</div>";
+                echo "error";
             }
-         
-
-
-    }
+        }
+        else{
+            echo "error";
+        }
 
 	break;
     case 5:
@@ -132,16 +134,39 @@ switch ($x){
     // Fecha Termino
     $final=$row['final_normal'];
 
+    $class=$row['class'];
+
+        switch ($class) {
+        case "event-info     ":
+            $tipo="Informativo";
+        break;
+        case "event-success  ":
+            $tipo="Deportivo";
+        break;
+        case "event-important":
+            $tipo="Artistico";
+        break;
+        case "event-warning  ":
+            $tipo="Cultural";
+        break;
+        case "event-special  ":
+            $tipo="Especial";
+        break;
+
+}
+
     echo "
          <h3>".$titulo."</h3>
          <hr>
          <b>Fecha inicio:</b> ".$inicio."
          <b>Fecha termino:</b> ".$final."
-        <p>".$evento."</p>";   
+        <p>".$evento."</p>
+        <b>tipo de evento:</b> ".$tipo;  
 
     break;
 	
     case 6:
+    
         $sql="SELECT * FROM evento"; 
 
         $conexion = new Conexion();

@@ -1,4 +1,5 @@
-
+<script src="../vista/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="../vista/css/bootstrap-datetimepicker.min.css" />
 <div class="container col-lg-12">
     <div class="tab-pane" id="eventos">
         <div class="row">
@@ -21,7 +22,6 @@
                                     </div>
 
                                 </div>
-                                <br>
                                 <div id="boton"></div>
                             </div>
                             <hr>
@@ -56,6 +56,9 @@
     <script src="../vista/js/calendar.js"></script>
     <script type="text/javascript" src="../vista/js/funcionesEvent.js"></script>
 
+
+
+<!-- MODAL AGREGAR EVENTO -->
 <div class="modal fade" id="add_evento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -63,42 +66,89 @@
                 <h3 class="modal-title" id="myModalLabel">Agregar nuevo evento</h3>
             </div>
             <div class="modal-body">
-                <form action="../controlador/funciones.php?x=4" method="POST">
-                    <label for="from">Inicio</label>
-                    <div class='input-group date' id='from'>
-                        <input type='text' id="from" name="from" class="form-control" readonly />
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                <form action="../controlador/funciones.php?x=4" method="POST" id="formuEventos">
+                    <div class='col-md-6'>
+                        <div class="form-group" align="center">
+                            <label for="from">Inicio</label>
+                            <div class='input-group date' id='from'>
+                                <input type='text' class="form-control" name="from" id="from" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="error" id="error-from"></div>
+                        
+                    </div>
+                    <div class='col-md-6'>
+                        <div class="form-group" align="center">
+                            <label for="to">Final</label>
+                            <div class='input-group date' id='to'>
+                                <input type='text' class="form-control" name="to" id="to" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="error" id="error-to"></div>
                     </div>
 
                     <br>
 
-                    <label for="to">Final</label>
-                    <div class='input-group date' id='to'>
-                        <input type='text' name="to" id="to" class="form-control" readonly />
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                    </div>
-
+                    <label for="title">Título</label>
+                    <input type="text" required autocomplete="off" name="title" class="form-control" id="title" placeholder="Introduce un título">
+                    <div class="error" id="error-title"></div>
                     <br>
 
                     <label for="tipo">Tipo de evento</label>
-                    <select class="form-control" name="class" id="tipo">
+                    <select class="form-control" name="class" id="class">
+                        <option value="" disabled selected>Seleccionar</option>
                         <option value="event-info">Informativo</option>
                         <option value="event-success">Deportivo</option>
                         <option value="event-important">Artistico</option>
                         <option value="event-warning">Cultural</option>
                         <option value="event-special">Especial</option>
                     </select>
+                    <div class="error" id="error-class"></div>
 
                     <br>
 
-
-                    <label for="title">Título</label>
-                    <input type="text" required autocomplete="off" name="title" class="form-control" id="title" placeholder="Introduce un título">
-
+                    <div class="form-group">
+                        <label for="disciplina">Disciplina</label>
+                        <div id="selector-disciplina">
+                            <select class="form-control" name="id_disciplina" required></select>
+                        </div>
+                        <div class="error" id="error-id_disciplina"></div>
+                    </div> 
                     <br>
 
-                    <label for="body">Evento</label>
+                    <label for="body">Descripcion</label>
                     <textarea id="body" name="event" required class="form-control" rows="3"></textarea>
+                    <div class="error" id="error-event"></div>
+                    <div id="resEvento"></div>
+                    <div class="modal-footer">
+                        
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Cancelar</button>
+                        <button type="submit" id="AgregarEvento" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL eliminar EVENTO -->
+<div class="modal fade" id="EliminarEvento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel">Eliminar evento</h3>
+            </div>
+            <div class="modal-body">
+                <form action="../controlador/funciones.php?x=7" method="POST">
+
+                    <label for="tipo">Tipo de evento</label>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Cancelar</button>
                         <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Agregar</button>
