@@ -1,4 +1,4 @@
-        (function($){
+(function($){
                 //creamos la fecha actual
                 var date = new Date();
                 var yyyy = date.getFullYear().toString();
@@ -8,14 +8,14 @@
                 //establecemos los valores del calendario
                 var options = {
 
-                    // definimos que los eventos se mostraran en ventana modal
+                    // definimos que los agenda se mostraran en ventana modal
                         modal: '#events-modal', 
 
                         // dentro de un iframe
                         modal_type:'iframe',    
 
-                        //obtenemos los eventos de la base de datos
-                        events_source: '<?=$base_url?>modelo/obtener_eventos.php', 
+                        //obtenemos los agenda de la base de datos
+                        events_source: '../controlador/funciones.php?x=6', 
 
                         // mostramos el calendario en el mes
                         view: 'month',             
@@ -28,7 +28,7 @@
                         language: 'es-ES', 
 
                         //Template de nuestro calendario
-                        tmpl_path: '<?=$base_url?>vista/tmpls/', 
+                        tmpl_path: '../vista/tmpls/', 
                         tmpl_cache: false,
 
 
@@ -56,7 +56,7 @@
                                 $.each(events, function(key, val)
                                 {
                                         $(document.createElement('li'))
-                                                .html('<a href="' + val.url + '">' + val.class + '</a>')
+                                                .html('<a href="' + val.url + '">' + val.title + '</a>')
                                                 .appendTo(list);
                                 });
                         },
@@ -104,7 +104,8 @@
                 });
         }(jQuery));
 
-            $(function () {
+
+        $(function () {
             $('#from').datetimepicker({
                 language: 'es',
                 minDate: new Date()
@@ -115,3 +116,22 @@
             });
 
         });
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        var x = getParameterByName('x');
+        
+        function mostrarboton(){
+            if (x==6) {
+                $("#boton").html("<div class='pull-right form-inline'><button class='btn btn-info' data-toggle='modal' data-target='#add_evento'>Añadir Evento</button></div>");
+            }
+
+        };
+
+        mostrarboton();
+

@@ -16,11 +16,11 @@ window.calendar_languages['es-ES'] = {
 	title_day:   '{0} {1} {2} {3}',
 
 	week:        'Semana {0}',
-	all_day:     'Todo el día',
-	time:        'Tiempo',
-	events:      'Desarrollos',
-	before_time: 'Tiempo antes de la cinta final',
-	after_time:  'Fin después de una cinta temporal',
+	all_day:     'Eventos de hoy',
+	time:        ' ',
+	events:      'Eventos del dia',
+	before_time: 'El evento terminara:',
+	after_time:  'Inicio de nuevo evento',
 
 	m0:  'Enero',
 	m1:  'Febrero',
@@ -56,8 +56,8 @@ window.calendar_languages['es-ES'] = {
 	d5: 'Viernes',
 	d6: 'Sábado',
 
-	easter:       'Pascuas',
-	easterMonday: 'Lunes de Pascuas',
+	easter:       ' ',
+	easterMonday: ' ',
 
 	first_day: 1,
 
@@ -67,13 +67,13 @@ window.calendar_languages['es-ES'] = {
 		'19-03':    "San José",
 		'easter-3': "Jueves Santo",
 		'easter-2': "Viernes Santo",
-		'easter':   "Pascua",
-		'easter+1': "Lunes de Pascua",
+		'easter':   " ",
+		'easter+1': " ",
 		'01-05':    "Día del Trabajador",
 		'15-08':    "Asunción",
-		'12-10':    "Fiesta Nacional de España",
+		'12-10':    " ",
 		'01-11':    "Día de todos los Santos",
-		'06-12':    "Día de la Constitución",
+		'06-12':    " ",
 		'08-12':    "Inmaculada Concepción",
 		'25-12':    "Navidad"
 	}

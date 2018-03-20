@@ -41,11 +41,11 @@ switch ($x){
 	
 // Funciones de Eventos
 	case 6: 
-	$html = file_get_contents('../vista/evento.html');
-	echo $html; 
+
+		$html = file_get_contents('../vista/evento.html');
+		echo $html; 
+
 	break;
-
-
 
 	case 10: 
 	$html = file_get_contents('../vista/agregarPro.html');

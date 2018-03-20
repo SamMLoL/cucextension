@@ -1,10 +1,4 @@
-/**
- * Bootstrap based calendar full view.
- *
- * https://github.com/Serhioromano/bootstrap-calendar
- *
- * User: Sergey Romanov <serg4172@mail.ru>
- */
+
 "use strict";
 
 Date.prototype.getWeek = function() {
@@ -39,29 +33,15 @@ if(!String.prototype.formatNum) {
 (function($) {
 
 	var defaults = {
-		// Width of the calendar
+
 		width:              '100%',
-		// Initial view (can be 'month', 'week', 'day')
 		view:               'month',
-		// Initial date. No matter month, week or day this will be a starting point. Can be 'now' or a date in format 'yyyy-mm-dd'
 		day:                'now',
-		// Day Start time and end time with time intervals. Time split 10, 15 or 30.
-		time_start:         '06:00',
-		time_end:           '22:00',
+		time_start:         '12:00',
+		time_end:           '24:00',
 		time_split:         '30',
-		// Source of events data. It can be one of the following:
-		// - URL to return JSON list of events in special format.
-		//   {success:1, result: [....]} or for error {success:0, error:'Something terrible happened'}
-		//   events: [...] as described in events property description
-		//   The start and end variables will be sent to this url
-		// - A function that received the start and end date, and that
-		//   returns an array of events (as described in events property description)
-		// - An array containing the events
 		events_source:      '',
-		// Path to templates should end with slash /. It can be as relative
-		// /component/bootstrap-calendar/tmpls/
-		// or absolute
-		// http://localhost/component/bootstrap-calendar/tmpls/
+
 		tmpl_path:          'tmpls/',
 		tmpl_cache:         true,
 		classes:            {
