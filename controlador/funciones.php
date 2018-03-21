@@ -68,29 +68,25 @@ switch ($x){
 
         if ($_POST['from']!="" AND $_POST['to']!="") 
         {
-$Datein                    = date('d/m/Y H:i:s', strtotime($_POST['from']));
-$Datefi                    = date('d/m/Y H:i:s', strtotime($_POST['to']));
-        $inicio = _formatear($Datein);
-        // y la formateamos con la funcion _formatear
+            $Datein = date('d/m/Y H:i:s', strtotime($_POST['from']));
+            $Datefi = date('d/m/Y H:i:s', strtotime($_POST['to']));
+            $inicio = _formatear($Datein);
 
-        $final  = _formatear($Datefi);
+            $final  = _formatear($Datefi);
 
-        // Recibimos el fecha de inicio y la fecha final desde el form
-        $orderDate                      = date('d/m/Y H:i:s', strtotime($_POST['from']));
-        $inicio_normal = $orderDate;
 
-        // y la formateamos con la funcion _formatear
-        $orderDate2                      = date('d/m/Y H:i:s', strtotime($_POST['to']));
-        $final_normal  = $orderDate2;
+            $orderDate = date('d/m/Y H:i:s', strtotime($_POST['from']));
+            $inicio_normal = $orderDate;
+
+
+            $orderDate2 = date('d/m/Y H:i:s', strtotime($_POST['to']));
+            $final_normal  = $orderDate2;
 
             $titulo = evaluar($_POST['title']);
 
             $contenido  = evaluar($_POST['event']);
             $id_disciplina  = evaluar($_POST['id_disciplina']);
             $clase  = evaluar($_POST['class']);
-
-
-
 
             $obj_evento = new objetos();
             $evento = $obj_evento->AgregarEvento($titulo,$contenido,$clase,$inicio,$final,$id_disciplina,$inicio_normal,$final_normal);
@@ -111,28 +107,19 @@ $Datefi                    = date('d/m/Y H:i:s', strtotime($_POST['to']));
 	break;
     case 5:
             
-    // Obtenemos el id del evento
     $id  = evaluar($_GET['id']);
 
-    // y lo buscamos en la base de dato
-        $obj_conex = new conexion();
-        $obj_conex->conectar();
-    $bd  = pg_query("SELECT * FROM evento WHERE id=$id");
+    $obj_evento = new objetos();
+    $evento = $obj_evento->ConsultaEventos($id);
 
-    // Obtenemos los datos
-    $row = pg_fetch_assoc($bd);
+    $row = pg_fetch_assoc($evento);
 
-    // titulo 
+
     $titulo=$row['title'];
-
-    // cuerpo
     $evento=$row['body'];
-
-    // Fecha inicio
     $inicio=$row['inicio_normal'];
-
-    // Fecha Termino
     $final=$row['final_normal'];
+    $disciplina=$row['descripcion'];
 
     $class=$row['class'];
 
@@ -153,15 +140,16 @@ $Datefi                    = date('d/m/Y H:i:s', strtotime($_POST['to']));
             $tipo="Especial";
         break;
 
-}
+    }
 
     echo "
          <h3>".$titulo."</h3>
          <hr>
          <b>Fecha inicio:</b> ".$inicio."
          <b>Fecha termino:</b> ".$final."
-        <p>".$evento."</p>
-        <b>tipo de evento:</b> ".$tipo;  
+         <b>Descripcion: </b><p>".$evento."</p>
+        <b>tipo de evento:</b> ".$tipo."
+        <br><b>Disciplina:</b> ".$disciplina;  
 
     break;
 	
@@ -171,26 +159,21 @@ $Datefi                    = date('d/m/Y H:i:s', strtotime($_POST['to']));
 
         $conexion = new Conexion();
         $conexion->conectar();
-        // Verificamos si existe un dato
         if ($conexion=pg_query($sql))
         { 
 
-            // creamos un array
             $datos = array(); 
 
-            //guardamos en un array multidimensional todos los datos de la consulta
             $i=0; 
 
-            // Ejecutamos nuestra sentencia sql
             $e = $conexion=pg_query($sql); 
 
-            while($row=pg_fetch_array($e)) // realizamos un ciclo while para traer los agenda encontrados en la base de dato
+            while($row=pg_fetch_array($e))
             {
                 $datos[$i] = $row; 
                 $i++;
             }
 
-            // Transformamos los datos encontrado en la BD al formato JSON
                 echo json_encode(
                         array(
                             "success" => 1,
@@ -201,12 +184,62 @@ $Datefi                    = date('d/m/Y H:i:s', strtotime($_POST['to']));
             }
             else
             {
-                // Si no existen agenda mostramos este mensaje.
                 echo "No hay datos"; 
             }
 
     break;
+
+    case 7:
+
+        $evento= $_POST['keyword'];
+
+        $obj_evento = new objetos();
+        $resultado = $obj_evento->AutocompeteEventos($evento);
+
+
+        while ($row=pg_fetch_assoc($resultado)) {
+            
+            $datos[] = $row;
+
+        }
+        if(!empty($datos)) {
+        ?>
+        <ul id="country-list">
+        <?php
+        foreach($datos as $country) {
+        ?>
+        <li onClick="selectCountry('<?php echo $country["title"]; ?>');"><?php echo $country["title"]; ?></li>
+        <?php } ?>
+        </ul>
+        <?php } 
+
+    break;
+
+    case 8:
+        
+        $title = $_POST['nombre-evento'];
+
+        $sql = "DELETE FROM evento WHERE title = '$title';";
+        $conexion = new Conexion();
+        $conexion->conectar();
+        if ($obj_conex=pg_query($sql)) 
+        {
+            echo "Evento eliminado";
+        }
+        else
+        {
+            echo "El evento no se pudo eliminar";
+        }
+         
+
+
+    break;
+
+
 	}
+
+
+
 
 
 function evaluar($valor) 
@@ -216,7 +249,6 @@ function evaluar($valor)
     return $valor;
 }
 
-// Formatear una fecha a microtime para añadir al evento, tipo 1401517498985.
 function _formatear($fecha)
 {
     return strtotime(substr($fecha, 6, 4)."-".substr($fecha, 3, 2)."-".substr($fecha, 0, 2)." " .substr($fecha, 10, 6)) * 1000;

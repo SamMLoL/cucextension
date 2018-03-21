@@ -33,10 +33,10 @@
 
 
                         // Hora de inicio
-                        time_start: '08:00', 
+                        time_start: '00:00', 
 
                         // y Hora final de cada dia
-                        time_end: '22:00',   
+                        time_end: '23:00',   
 
                         // intervalo de tiempo entre las hora, en este caso son 30 minutos
                         time_split: '30',    
@@ -107,34 +107,20 @@
 
         $(function () {
 
-
-           /* $('#from').datetimepicker({
-                language: 'es',
+            $('#from').datetimepicker({
+                format: 'MM/DD/YYYY HH:mm:ss',
                 minDate: new Date()
             });
-
             $('#to').datetimepicker({
-                language: 'es',
-                minDate: new Date()
-            }); 
-                */
-
-        $('#from').datetimepicker({
-            format: 'MM/DD/YYYY HH:mm:ss',
-            minDate: new Date()
-        });
-        $('#to').datetimepicker({
-            format: 'MM/DD/YYYY HH:mm:ss',
-            useCurrent: false //Important! See issue #1075
-        });
-        $("#from").on("dp.change", function (e) {
-            $('#to').data("DateTimePicker").minDate(e.date);
-        });
-        $("#to").on("dp.change", function (e) {
-            $('#from').data("DateTimePicker").maxDate(e.date);
-        });
-
-
+                format: 'MM/DD/YYYY HH:mm:ss',
+                useCurrent: false //Important! See issue #1075
+            });
+            $("#from").on("dp.change", function (e) {
+                $('#to').data("DateTimePicker").minDate(e.date);
+            });
+            $("#to").on("dp.change", function (e) {
+                $('#from').data("DateTimePicker").maxDate(e.date);
+            });
         });
 
 
@@ -154,9 +140,9 @@
         var x = getParameterByName('x');
         
         function mostrarboton(){
-            if (x==6) {
+    
                 $("#boton").html("<div class='pull-right form-inline'><button class='btn btn-info' data-toggle='modal'style=\"width:150px; height:35px;\" data-target='#add_evento'>Añadir Evento</button><br><br><button class='btn btn-danger' style=\"width:150px; height:35px;\" data-toggle='modal' data-target='#EliminarEvento'>Eliminar Evento</button></div>");
-            }
+         
 
         };
 
@@ -190,20 +176,15 @@ $(document).ready(function(){
                         type: "POST",
                         url:"../controlador/funciones.php?x=4",
                         data: $("#formuEventos").serialize(),
-                        beforeSend:function(){
-                        $('#AgregarEvento').val('Conectando...');
-                        },
                         success: function(data){
-
-                            if (data=="ok") {
+                            console.log(data);
+                            if (data = 'ok') {
                                 alert("El evento ha sido agregado con exito");
                                 $(location).attr('href','../controlador/index.php?x=6');
                             } 
                             else {    
                                 $("#resEvento").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se logro registrar el evento, verifique los datos ingresados.</div>");
                                                  
-                                
-
                             }
                         }
                     });
@@ -220,4 +201,30 @@ $(document).ready(function(){
                   }
             }
             });
+
+
+
+
+
+    $("#nombre-evento").keyup(function(){
+        $.ajax({
+        type: "POST",
+        url: "../controlador/funciones.php?x=7",
+        data:'keyword='+$(this).val(),
+        beforeSend: function(){
+            $("#nombre-evento").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
+        },
+        success: function(data){
+            $("#suggesstion-box").show();
+            $("#suggesstion-box").html(data);
+            $("#nombre-evento").css("background","#FFF");
+        }
+        });
+    });
 });
+
+function selectCountry(val) {
+$("#nombre-evento").val(val);
+$("#suggesstion-box").hide();
+}
+

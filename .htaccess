@@ -1,0 +1,6 @@
+
+Options +FollowSymlinks
+RewriteEngine on
+
+RewriteRule ^index/([0-9]+)$ /cucextension/controlador/index.php?x=$1
+

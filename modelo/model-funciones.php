@@ -118,24 +118,59 @@ require_once('conexion.php');
 
 		$sql="INSERT INTO public.evento(title, body, class, start, \"end\", inicio_normal, id_disciplina, final_normal)
                 VALUES ('$titulo','$contenido','$clase','$inicio','$final','$inicio_normal','$id_disciplina','$final_normal');";
-
 		$query = pg_query($sql);
+
+
+    	$im=$obj_conex=pg_query("SELECT MAX(id) AS id FROM evento");
+        $row = pg_fetch_row($im);  
+        $id = trim($row[0]);
+        $link = "../controlador/funciones.php?x=5&id=$id";
+        $ql="UPDATE evento SET url = '$link' WHERE id = $id";
+        $obj_conex=pg_query($ql);
+		
 
 		if ($query)
 		{	
-			$im=$obj_conex=pg_query("SELECT MAX(id) AS id FROM evento");
-            $row = pg_fetch_row($im);  
-            $id = trim($row[0]);
-            $link = "../controlador/funciones.php?x=5&id=$id";
-            $query="UPDATE evento SET url = '$link' WHERE id = $id";
-            $obj_conex=pg_query($query);
-			return true;
+			return $query;
 		}
 		else
 		{
 			return false;
 		}
 
+	}
+
+		public function ConsultaEventos($id)
+	{
+		$conex = new Conexion();
+		$conex->conectar();
+		$sql = "SELECT * FROM evento, disciplina WHERE id=$id and evento.id_disciplina = disciplina.id_disciplina";
+
+		$query = pg_query($sql);
+
+		if ($query)
+		{
+			return $query;
+		}
+		else
+		{
+			return false;
+		}
+	}
+			public function AutocompeteEventos($evento)
+	{
+		$conex = new Conexion();
+		$conex->conectar();
+		$query = pg_query("SELECT * FROM evento WHERE title LIKE '%$evento%';");
+
+		 if ($query) 
+		{
+			return $query;			
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 

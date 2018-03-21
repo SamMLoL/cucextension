@@ -139,23 +139,38 @@
 
 
 <!-- MODAL eliminar EVENTO -->
-<div class="modal fade" id="EliminarEvento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="myModalLabel">Eliminar evento</h3>
-            </div>
-            <div class="modal-body">
-                <form action="../controlador/funciones.php?x=7" method="POST">
+    <div id="EliminarEvento" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false"> 
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button class="close" aria-hidden="true" data-dismiss="modal">&times;</button> 
+                    <h3 class="modal-tittle">Eliminar evento</h3>
+                </div> 
+                <div class="modal-body">
+                    <form class="form-horizontal" action="../controlador/funciones.php?x=8" role="form" id="EventoEliminar" method="POST">
+                        <div class="form-group">
+                            <label class="control-label col-xs-5" for="nombre-evento">Nombre del evento:</label>
+                            <div class="col-xs-5 frmSearch">
+                                <input type="text" class="form-control" name="nombre-evento" id="nombre-evento">
+                                <div id="suggesstion-box"></div>
+                            </div>
+                        </div> 
 
-                    <label for="tipo">Tipo de evento</label>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Cancelar</button>
-                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Agregar</button>
-                    </div>
-                </form>
+                        <div id="EliminarRespuesta"></div>
+                
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                <span class="hidden-xs"> Cerrar</span>
+                            </button>
+                            <button type="submit" id="EliminarNombre" name="EliminarNombre" class="btn btn-danger" onclick="return confirm('¿Estas seguro que quieres eliminar este evento?')">
+                                <span class="glyphicon glyphicon-trash"></span><span class="hidden-xs"> Eliminar</span>
+                            </button>
+                        </div>
+                        <dir id="resp"></dir>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 
