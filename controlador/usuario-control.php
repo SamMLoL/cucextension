@@ -28,7 +28,7 @@ switch ($x){
 
 			session_start();
 			$_SESSION['id']= $row['id'];
-			$_SESSION['estado'] = 'Autentificado';
+			$_SESSION['status'] = 'Autentificado';
 			echo "ok";
 		}else{
 
@@ -100,15 +100,24 @@ switch ($x){
 
 			session_destroy();
 
-			header("Location: ../vista/inicio.html");
+			header("Location: ../inicio");
 			die();
 					
 
 	break;
+	case 5:
+
+		session_start();
+
+		$status = $_SESSION['status'];
+
+		echo $status;
+
+
+		break;
 
 	default: 
-		$html = file_get_contents('../vista/inicio.html');
-		echo $html; 
+	header("Location: ../inicio");
 	
 	}
 

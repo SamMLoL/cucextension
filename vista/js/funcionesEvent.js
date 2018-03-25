@@ -8,14 +8,14 @@
                 //establecemos los valores del calendario
                 var options = {
 
-                    // definimos que los agenda se mostraran en ventana modal
+                    // definimos que los eventos se mostraran en ventana modal
                         modal: '#events-modal', 
 
                         // dentro de un iframe
                         modal_type:'iframe',    
 
-                        //obtenemos los agenda de la base de datos
-                        events_source: '../controlador/funciones.php?x=6', 
+                        //obtenemos los eventos de la base de datos
+                        events_source: 'controlador/funciones.php?x=6', 
 
                         // mostramos el calendario en el mes
                         view: 'month',             
@@ -28,7 +28,7 @@
                         language: 'es-ES', 
 
                         //Template de nuestro calendario
-                        tmpl_path: '../vista/tmpls/', 
+                        tmpl_path: 'vista/tmpls/', 
                         tmpl_cache: false,
 
 
@@ -113,7 +113,7 @@
             });
             $('#to').datetimepicker({
                 format: 'MM/DD/YYYY HH:mm:ss',
-                useCurrent: false //Important! See issue #1075
+                useCurrent: false 
             });
             $("#from").on("dp.change", function (e) {
                 $('#to').data("DateTimePicker").minDate(e.date);
@@ -123,21 +123,26 @@
             });
         });
 
+        
+
+        var autenficar = function(){
+            $.ajax({
+                type: "POST",
+                url: "controlador/usuario-control.php?x=5",
+                
+                success: function(response){
+
+                    if (response=="Autentificado") {
+                        mostrarboton();
+                    }
+                    else{
+                        return false
+                    }
+                }
+            });
+        };
 
 
-
-
-
-
-
-        function getParameterByName(name) {
-            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-        }
-
-        var x = getParameterByName('x');
         
         function mostrarboton(){
     
@@ -150,7 +155,7 @@
 
 
 $(document).ready(function(){
-    mostrarboton();
+    autenficar();
 
         $("#formuEventos").validate({
                 rules: {
@@ -174,13 +179,13 @@ $(document).ready(function(){
                 submitHandler: function(form){
                     $.ajax({
                         type: "POST",
-                        url:"../controlador/funciones.php?x=4",
+                        url:"controlador/funciones.php?x=4",
                         data: $("#formuEventos").serialize(),
                         success: function(data){
                             console.log(data);
                             if (data = 'ok') {
                                 alert("El evento ha sido agregado con exito");
-                                $(location).attr('href','../controlador/index.php?x=6');
+                                $(location).attr('href','eventos');
                             } 
                             else {    
                                 $("#resEvento").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se logro registrar el evento, verifique los datos ingresados.</div>");
@@ -209,7 +214,7 @@ $(document).ready(function(){
     $("#nombre-evento").keyup(function(){
         $.ajax({
         type: "POST",
-        url: "../controlador/funciones.php?x=7",
+        url: "controlador/funciones.php?x=7",
         data:'keyword='+$(this).val(),
         beforeSend: function(){
             $("#nombre-evento").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");

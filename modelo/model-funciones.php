@@ -124,7 +124,7 @@ require_once('conexion.php');
     	$im=$obj_conex=pg_query("SELECT MAX(id) AS id FROM evento");
         $row = pg_fetch_row($im);  
         $id = trim($row[0]);
-        $link = "../controlador/funciones.php?x=5&id=$id";
+        $link = "controlador/funciones.php?x=5&id=$id";
         $ql="UPDATE evento SET url = '$link' WHERE id = $id";
         $obj_conex=pg_query($ql);
 		

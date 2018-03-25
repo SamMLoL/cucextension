@@ -2,5 +2,18 @@
 Options +FollowSymlinks
 RewriteEngine on
 
-RewriteRule ^index/([0-9]+)$ /cucextension/controlador/index.php?x=$1
 
+RewriteRule ^inicio /cucextension/controlador/index.php?x=100
+RewriteRule ^index /cucextension/controlador/index.php
+RewriteRule ^participantes /cucextension/controlador/index.php?x=1
+RewriteRule ^agregar-participantes /cucextension/controlador/index.php?x=2
+RewriteRule ^consultar-participantes /cucextension/controlador/index.php?x=3
+RewriteRule ^mostrar-participante /cucextension/controlador/index.php?x=4
+RewriteRule ^lista-participantes /cucextension/controlador/index.php?x=5
+RewriteRule ^eventos /cucextension/controlador/index.php?x=6
+
+RewriteRule ^profesores /cucextension/controlador/index.php?x=10
+
+
+
+DirectoryIndex /cucextension/controlador/index.php       

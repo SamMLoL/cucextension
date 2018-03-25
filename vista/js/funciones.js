@@ -10,7 +10,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "../controlador/usuario-control.php?x=3",
+                        url: "controlador/usuario-control.php?x=3",
                         data: dataString,
                         success: function(data) {
                             $('#info').fadeIn(300).html(data);
@@ -38,7 +38,7 @@
             submitHandler: function(form){
                 $.ajax({
                     type: "POST",
-                    url:"../controlador/usuario-control.php?x=2",
+                    url:"controlador/usuario-control.php?x=2",
                     data: $("#formuRegistro").serialize(),
                     beforeSend:function(){
                         $('#registrar').val('Conectando...');
@@ -69,7 +69,7 @@
             submitHandler: function(form){
                 $.ajax({
                     type: "POST",
-                    url:"../controlador/usuario-control.php?x=1",
+                    url:"controlador/usuario-control.php?x=1",
                     data: $("#formulogin").serialize(),
                     beforeSend:function(){
                         $('#login').val('Conectando...');
@@ -77,7 +77,7 @@
                     success: function(data){
                         
                         if (data=="ok") {
-                            $(location).attr('href','../controlador/index.php');
+                            $(location).attr('href','index');
                         } else {
                             $("#respuestalogin").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> Usuario o contraseña incorrectas.</div>");
                             $('#login').val('ingresar');
@@ -137,7 +137,7 @@
                 submitHandler: function(form){
                     $.ajax({
                         type: "POST",
-                        url:"../controlador/participante-control.php?x=1",
+                        url:"controlador/participante-control.php?x=1",
                         data: $("#formuParticipante").serialize(),
                         beforeSend:function(){
                             $('#registrar').val('Conectando...');
@@ -151,7 +151,8 @@
                             }
                             else {                         
                                 alert("El participante ha sido registrado con exito");
-                                $(location).attr('href','../controlador/index.php?x=4&cedula='+data);
+                                var cedula = data;
+                                ModicarParti(cedula);
                            }
                         }
                     });
@@ -171,7 +172,7 @@
 
             $.ajax({
                     type: "POST",
-                    url: "../controlador/funciones.php?x=1",
+                    url: "controlador/funciones.php?x=1",
                     success: function(response)
                     {
                         $('#selector-disciplina select').html(response).fadeIn();
@@ -195,7 +196,7 @@
                 submitHandler: function(form){
                     $.ajax({
                         type: "POST",
-                        url:"../controlador/funciones.php?x=2",
+                        url:"controlador/funciones.php?x=2",
                         data: $("#formdisciplina").serialize(),
                         beforeSend:function(){
                             $('#GuardarNombre').val('Guardando...');
@@ -222,7 +223,7 @@
                 submitHandler: function(form){
                     $.ajax({
                         type: "POST",
-                        url:"../controlador/funciones.php?x=3",
+                        url:"controlador/funciones.php?x=3",
                         data: $("#formEliminar").serialize(),
                         beforeSend:function(){
                             $('#EliminarNombre').val('Cargando...');
@@ -248,15 +249,17 @@
             },
             submitHandler: function(form){
                 $.ajax({
-                    type: "GET",
-                    url:"../controlador/participante-control.php?x=2",
+                    type: "POST",
+                    url:"controlador/participante-control.php?x=2",
                     data: $("#formubuscar").serialize(),
                     beforeSend:function(){
                         $('#buscarPart').val('Buscando...');
                     },
                     success: function(data){
                         if (data!=0) {
-                            $(location).attr('href','../controlador/index.php?x=4&cedula='+data);
+                            
+                           // cedula(data);
+                            $(location).attr('href','mostrar-participante');
                         } else {
                             $("#respbuscar").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> Cedula incorrecta.</div>");
                             $('#buscarPart').val('Buscar Participante');
@@ -272,7 +275,7 @@
 
  
     });
-
+ 
 
     $(document).on('click', '#agregarDis', function() {
         $('#ModalAgregarDisciplina').modal('show');
@@ -284,3 +287,20 @@
 
 
 
+
+ var  ModicarParti = function(cedula){
+    var parametros = {
+                "cedula1" : cedula,
+        };
+
+        $.ajax({
+                data: parametros,
+                url:   'controlador/participante-control.php?x=2', 
+                type:  'post', 
+                success:  function (response) { 
+                        console.log(response)
+                        $(location).attr('href','mostrar-participante');
+                }
+        });
+
+ };

@@ -13,7 +13,7 @@
         $.ajax({
 
             type: "POST",
-            url: "../controlador/participante-control.php?x=3&cedula="+cedula,
+            url: "controlador/participante-control.php?x=3",
             dataType: 'json',
             data:{id:$('#cambiar').val()}
 
@@ -34,6 +34,7 @@
 
         }); 
     }
+
 
     $(document).ready(function(){
 
@@ -69,7 +70,7 @@
                 submitHandler: function(form){
                     $.ajax({
                         type: "POST",
-                        url:"../controlador/participante-control.php?x=4",
+                        url:"controlador/participante-control.php?x=4",
                         data: $("#formuModificar").serialize(),
                         beforeSend:function(){
                             $('#guardar').val('Conectando...');
@@ -79,10 +80,10 @@
 
                             if (data == "error") {
 
-                                $("#RespuestaMostrar").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se logro registrar el participante, la cedula puede estar ya registrada</div>");
+                                $("#RespuestaMostrar").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se lograron guardar los datos del participante, verifique los datos ingresados.</div>");
                             }
                             else {                         
-                               $("#RespuestaMostrar").html("<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Registrado!</strong> la nueva disciplina ha sido ha registrada exitosamente.</div>");
+                               $("#RespuestaMostrar").html("<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Registrado!</strong> Los nuevos datos de participante han sido guardado con exito.</div>");
                            }
                         }
                     });
@@ -95,12 +96,14 @@
 
     })
 
+
+//FUNCIONES LISTA
 $(document).ready( function () {
     lista();
 });
 var status_simple = function ( data ) {
     if (data=='t') {
-    return 'Active';
+    return 'Activo';
     }
     else{
         return 'Inactivo'
@@ -111,7 +114,7 @@ var lista = function(){
         "destroy":true,
         "ajax":{
             "method": "POST",
-            "url": "../controlador/participante-control.php?x=5"
+            "url": "controlador/participante-control.php?x=5"
         },
         "columns":[
             {"data":"id"},
@@ -150,7 +153,7 @@ var lista = function(){
             var apellido = data.apellido;
              var bool=confirm("Seguro quieres editar el participante: "+nombre+" "+apellido+"?");
             if(bool){
-                $(location).attr('href','../controlador/index.php?x=4&cedula='+cedula);
+                ModicarParti(cedula);
             }
             
         
@@ -204,7 +207,7 @@ var lista = function(){
         $.ajax({
             data: parametros,
             type: "POST",
-            url: "../controlador/participante-control.php?x=6",
+            url: "controlador/participante-control.php?x=6",
             
             success: function(response){
 
@@ -215,7 +218,6 @@ var lista = function(){
                     alert("El participante ha sido eliminado con exito");
                 }
             }
-        })
+        });
 
-    }
-
+    };

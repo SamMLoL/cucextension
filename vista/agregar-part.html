@@ -1,4 +1,4 @@
-<script src="../vista/js/funciones.js"></script>
+<script src="vista/js/funciones.js"></script>
 <div class="container col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-offset-1 col-sm-10 col-xs-12 ">
 	<div class="tab-pane" id="participantes">
 		<div class="row">
@@ -8,7 +8,7 @@
 						<div class="panel-heading">Agregar</div>
 						<div class="panel-body img-agregar">
 							<div class="contenido">
-							 <img src="../vista/img/agregar.png" alt="agregar" class="image" style="width:100%">
+							 <img src="vista/img/agregar.png" alt="agregar" class="image" style="width:100%">
 							 <div class="middle">
 								<div class="h2-agregar">
 									<div>
@@ -28,13 +28,13 @@
                     <ul class="nav flex-column">
 						<h4>Opciones</h4>
 						<li class="nav-item">
-					    	<a class="nav-link active" href="index.php?x=1">Inicio</a>
+					    	<a class="nav-link active" href="participantes">Inicio</a>
 					  	</li>
 					  	<li class="nav-item">
-					    	<a class="nav-link" href="index.php?x=2">Agregar</a>
+					    	<a class="nav-link" href="agregar-participantes">Agregar</a>
 					  	</li>
 					  	<li class="nav-item">
-					    	<a class="nav-link" href="index.php?x=3">Consultar</a>
+					    	<a class="nav-link" href="consultar-participantes">Consultar</a>
 					  	</li>
 					</ul>
 				</div>
@@ -54,8 +54,8 @@
 
             <div class="modal-body">
                               
-                <form class="form-horizontal" id="formuParticipante" action="../controlador/participante-control.php?x=1" method="POST">
-                    <div class="form-group">
+                <form class="form-horizontal" id="formuParticipante" action="controlador/participante-control.php?x=1" method="POST">
+                    <div class="form-group"> 
                         <label class="control-label col-xs-3">Cedula:</label>
                         <div class="col-xs-6">
                             <input type="text" class="form-control" name="cedula" placeholder="Cedula">
@@ -109,8 +109,8 @@
                             <select class="form-control" name="id_disciplina" required></select>
                         </div>
                         <div class="btn-group" role="group">
-                            <button title="Agregar nueva disciplina" class=" col-md-4" type="button" id="agregarDis" style="margin: 0px; background-color: transparent; border:1px none;"><img width="35" height="35" src="../vista/img/Plus_blue.png"/></button>
-                            <button title="Eliminar una disciplina" class="col-md-4" type="button" id="eliminarDis" style="margin: 0px; background-color: transparent; border:1px none;"><img width="35" height="35" src="../vista/img/icono-eliminar.png"/></button>  
+                            <button title="Agregar nueva disciplina" class=" col-md-4" type="button" id="agregarDis" style="margin: 0px; background-color: transparent; border:1px none;"><img width="35" height="35" src="vista/img/Plus_blue.png"/></button>
+                            <button title="Eliminar una disciplina" class="col-md-4" type="button" id="eliminarDis" style="margin: 0px; background-color: transparent; border:1px none;"><img width="35" height="35" src="vista/img/icono-eliminar.png"/></button>  
                         </div>
                         
                     </div>

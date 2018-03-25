@@ -48,28 +48,37 @@ switch ($x){
 
 //FUNCION MODIFICAR/ BUSCAR
 	case 2: 
-	$cedula=$_GET['cedula1'];
+	$cedula=$_POST['cedula1'];
 
 	$obj_buscar = new participante();
 	$buscarParticipante = $obj_buscar->verificarParticipante($cedula);
 	$validar = pg_fetch_array($buscarParticipante);
 	if ($validar) {
-		echo $cedula;
-	}	
+		
+
+			session_start();
+			$_SESSION['cedula']= $cedula;
+
+			echo $cedula;
 	
+	}	
 
 	break;
 
 	case 3: 
 		$datos = new stdClass();
-		$cedula= $_GET['cedula'];
+		session_start();
+		$cedula= $_SESSION['cedula'];
 
 		$obj_mostrar = new participante();
 		$mostrarParticipante = $obj_mostrar->MostrarParticipante($cedula);
 		$datos = pg_fetch_object($mostrarParticipante);
 	  echo json_encode($datos);
+
 	break;
 	case 4: 
+
+
 		$id= $_POST["id"];
 		$cedula = $_POST["cedula"];
 		$nombre = $_POST['nombre'];
@@ -83,15 +92,26 @@ switch ($x){
 		$descripcion_part = $_POST['descripcion_part'];
 		$status = $_POST['status'];
 
-		$obj_modificar = new participante();
-		$modificar= $obj_modificar->ModificarParticipante($id, $cedula,$nombre,$apellido,$edad,$sexo,$carrera,$correo,$telefono,$descripcion_part,$id_disciplina,$status);
 
-		if ($modificar) {
-			echo "ok";
+		$obj_participante = new participante();
+		$validarParticipante = $obj_participante->verificarParticipante($cedula);
+		$validar = pg_fetch_array($validarParticipante);
+
+		if ($validar==0) {
+
+			$obj_modificar = new participante();
+			$modificar= $obj_modificar->ModificarParticipante($id, $cedula,$nombre,$apellido,$edad,$sexo,$carrera,$correo,$telefono,$descripcion_part,$id_disciplina,$status);
+
+			if ($modificar) {
+				echo "ok";
+			}
+			else{
+				echo "error";
+			}
 		}
 		else{
 			echo "error";
-		}
+			}
 	break;
 
 	case 5: 
