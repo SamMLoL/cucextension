@@ -1,7 +1,15 @@
 <% _.each(events, function(event){ %>
 <div class="cal-row-fluid">
 	<div class="cal-cell<%= event.days%> cal-offset<%= event.start_day %> day-highlight dh-<%= event['class'] %>" data-event-class="<%= event['class'] %>">
-		<a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>" class="cal-event-week event<%= event.id %>"><%= event.title %></a>
+                <button title="<%= event.title %>" class="openBtn2" type="button" style="margin: 0px; background-color: transparent; border:1px none;"><%= event.title %> </button>  
+
 	</div>
 </div>
+	<script>
+		$('.openBtn2').on('click',function(){
+		    $('.modal-body').load("<%= event.url ? event.url : 'javascript:void(0)' %>",function(){
+		        $('#events-modal').modal({show:true});
+		    });
+		});
+		</script>
 <% }); %>

@@ -143,6 +143,8 @@ switch ($x){
     }
 
     echo "
+        <link rel=\"stylesheet\" type=\"text/css\" href=\"../vista/css/bootstrap.min.css\">
+        <script src=\"../vista/js/bootstrap.min.js\"></script>
          <h3>".$titulo."</h3>
          <hr>
          <b>Fecha inicio:</b> ".$inicio."

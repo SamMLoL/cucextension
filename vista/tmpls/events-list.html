@@ -3,11 +3,17 @@
 	<ul class="unstyled list-unstyled" data-toggle="tooltip">
 		<% _.each(events, function(event) { %>
 			<li>
-				<span class="pull-left event <%= event['class'] %>" data-toggle="tooltip"></span>&nbsp;
-				<a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
-					data-event-class="<%= event['class'] %>" class="event-item" data-toggle="tooltip">
-					<%= event.title %></a>
+				<span class="pull-left event <%= event['class'] %>" data-toggle="tooltip"></span>&nbsp;	
+                <button title="<%= event.title %>" class="openBtn3" type="button" style="margin: 0px; background-color: transparent; border:1px none;"><%= event.title %> </button>  
 			</li>
+			<script>
+			$('.openBtn3').on('click',function(){
+			    $('.modal-body').load("<%= event.url ? event.url : 'javascript:void(0)' %>",function(){
+			        $('#events-modal').modal({show:true});
+			    });
+			});
+			</script>
+
 		<% }) %>
 	</ul>
 </div>
