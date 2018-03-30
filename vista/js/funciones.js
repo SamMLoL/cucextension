@@ -113,6 +113,7 @@
                     edad: { required: true, digits: true},
                     sexo: { required: true},
                     carrera: { required: true},
+                    select1: {required: true},
                     id_disciplina: { required: true},
                     correo: { required:true, email: true, minlength: 13, maxlength: 50},
                     telefono: { required: true, digits:true, minlength: 4, maxlength: 25},
@@ -127,6 +128,7 @@
                     edad: "Debe instroducir una edad valida",
                     sexo: "Debe seleccionar un sexo",
                     carrera: "Debe seleccionar una carrera",
+                    select1: "Debe seleccionar una unidad luego una disciplina.",
                     id_disciplina: "Debe seleccionar una disciplina.",
                     correo : "Debe introducir un email válido.",
                     telefono: "Debe introducir un telefono valido.",
@@ -167,29 +169,41 @@
 
 
  $(document).ready(function() {
-        
-        var disci = function(){
 
-            $.ajax({
-                    type: "POST",
-                    url: "controlador/funciones.php?x=1",
-                    success: function(response)
-                    {
-                        $('#selector-disciplina select').html(response).fadeIn();
-                        mostrar();
-                    }
-            });
-            return false
-        };
-        disci();
+        
+        var SeleccionarDis = function(){
+
+
+                $("#select1").change(function(event){
+                    var unidad = $("#select1").find(':selected').val();
+                    $("#id_disciplina").load('controlador/funciones.php?x=1&unidad='+unidad);
+                });
+        }
+
+        
+
+        $('#select1').on('change', function(){
+         var valor = $("#select1").val();
+        if (valor === 0 || valor === true){
+            $("#id_disciplina").attr('disabled', true);
+
+        }else{
+            $("#id_disciplina").attr('disabled', false);
+        
+        }
+        })
+        SeleccionarDis();
+
 
 
             
             $("#formdisciplina").validate({
                 rules: {
+                    unidad: {required: true},
                     nombre: { required: true, minlength: 4, maxlength: 25},
                 },
                 messages: {
+                    unidad: "Debe seleccionar una unidad antes de registrar una disciplina.",
                     nombre: {required: 'Debe introducir una disciplina.', minlength: 'El mínimo permitido son 4 caracteres.', maxlength: 'El máximo permitido son 25 caracteres.'},
                 },
             
@@ -204,9 +218,17 @@
                         success: function(data){
                           $("#resp").html(data);
                           $('#GuardarNombre').val('Guardar');
-                          disci();
+
+                            $('#select1 option').prop('selected', function() {
+                                return this.defaultSelected;
+                            });
+                            $('#UnidadEvento option').prop('selected', function() {
+                                return this.defaultSelected;
+                            });
                         }
                     });
+                    
+
                 return false
 
                 }
@@ -215,9 +237,11 @@
             $("#formEliminar").validate({
                 rules: {
                     id_disciplina: { required: true},
+                    Selectunidad2: { required: true},
                 },
                 messages: {
-                    id_disciplina: {required: 'Debe seleccionar una disciplina'},
+                    Selectunidad: {required: 'Debe seleccionar la unidad y luego la disciplina'},
+                    id_disciplina2: {required: 'Debe seleccionar una disciplina'},
                 },
 
                 submitHandler: function(form){
@@ -229,15 +253,47 @@
                             $('#EliminarNombre').val('Cargando...');
                         },
                         success: function(data){
-                          $("#respEliminar").html(data);
-                          $('#GuardarNombre').val('Eliminar');
-                          disci();
+                            $("#respEliminar").html(data);
+                            $('#GuardarNombre').val('Eliminar');
+
+                            $('#select1 option').prop('selected', function() {
+                                return this.defaultSelected;
+                            });
+                            $('#UnidadEvento option').prop('selected', function() {
+                                return this.defaultSelected;
+                            });
+                          
                         }
                     });
                 return false
 
                 }
             });
+
+    var SelecEliminar = function(){
+
+                $("#Selectunidad").change(function(event){
+                    var unidad = $("#Selectunidad").find(':selected').val();
+                    $("#id_disciplina2").load('controlador/funciones.php?x=1&unidad='+unidad);
+                });
+        }
+
+        
+        $('#Selectunidad').on('change', function(){
+         var valor = $("#Selectunidad").val();
+        if (valor === 0 || valor === true){
+            $("#id_disciplina2").attr('disabled', true);
+
+        }else{
+            $("#id_disciplina2").attr('disabled', false);
+        
+        }
+        })
+        SelecEliminar();
+
+
+
+
 
         $("#formubuscar").validate({
             rules: {

@@ -14,6 +14,7 @@ class participante{
 	private $descripcion_part;
 	private $id_disciplina;
 	private $status;
+	private $unidad;
 	    
 	public  function participante()
 	{
@@ -27,6 +28,7 @@ class participante{
 		$this->descripcion_part="";
 		$this->id_disciplina="";
 		$this->status="";
+		$this->unidad="";
 
 	}
 	public function RegistrarParticipante($cedula,$nombre,$apellido,$edad,$sexo,$carrera,$correo,$telefono,$descripcion_part,$id_disciplina,$status)
@@ -92,10 +94,28 @@ class participante{
 	{
 		$obj_conex = new conexion();
 		$obj_conex->conectar();
-		$query = pg_query("SELECT *
+		$query = pg_query("SELECT
+		  disciplina.descripcion, 
+		  disciplina.unidad,
+		  disciplina.id_disciplina, 
+		  participantes.nombre, 
+		  participantes.edad, 
+		  participantes.sexo, 
+		  participantes.descripcion_part, 
+		  participantes.telefono, 
+		  participantes.correo, 
+		  participantes.id_disciplina, 
+		  participantes.status, 
+		  participantes.cedula, 
+		  participantes.apellido, 
+		  participantes.carrera, 
+		  participantes.id
 		FROM 
-  			public.participantes
+  			public.participantes,
+  			public.disciplina
  		WHERE
+			disciplina.id_disciplina=participantes.id_disciplina
+		AND
   			participantes.cedula='$cedula';");		
 	
 		if(pg_num_rows($query)>0){
@@ -123,7 +143,7 @@ class participante{
       	status='$status'
 		WHERE id='$id';";
 
-		$query = pg_query($sql);
+		$query = @pg_query($sql);
 
 		if ($query) 
 		{

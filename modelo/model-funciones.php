@@ -14,7 +14,7 @@ require_once('conexion.php');
 	private $inicio_normal;
 	private $final_normal;
 	private $url;
-	private $id_unidad;
+	private $unidad;
  
 	    
 	public  function objetos()
@@ -29,11 +29,11 @@ require_once('conexion.php');
 		$this->inicio_normal="";
 		$this->final_normal="";
 		$this->url="";
-		$this->id_unidad="";
+		$this->unidad="";
 
 	}
 
-	public function selectdis()
+	public function selectdis($unidad)
 
 	{	
 		$conex = new Conexion();
@@ -42,6 +42,7 @@ require_once('conexion.php');
  		 disciplina.id_disciplina, disciplina.descripcion
 		FROM 
   			public.disciplina
+  		WHERE unidad='$unidad'
   		ORDER BY
   			disciplina.id_disciplina;");
 
@@ -56,12 +57,12 @@ require_once('conexion.php');
 
 	}
 
-	public function RegistrarDisciplina($descripcion)
+	public function RegistrarDisciplina($descripcion, $unidad)
 	{
 		$obj_conex = new Conexion();
 		$obj_conex->conectar();
-		$query = pg_query("INSERT INTO public.disciplina(descripcion)
-    					   VALUES ('$descripcion');");
+		$query = pg_query("INSERT INTO public.disciplina(descripcion, unidad)
+    					   VALUES ('$descripcion','$unidad');");
 
 		if($query)
 		{
@@ -131,7 +132,7 @@ require_once('conexion.php');
 
 		if ($query)
 		{	
-			return $query;
+			return true;
 		}
 		else
 		{
@@ -157,11 +158,11 @@ require_once('conexion.php');
 			return false;
 		}
 	}
-			public function AutocompeteEventos($evento)
+			public function AutocompeteEventos($id_disciplina)
 	{
 		$conex = new Conexion();
 		$conex->conectar();
-		$query = pg_query("SELECT * FROM evento WHERE title LIKE '%$evento%';");
+		$query = pg_query("SELECT * FROM evento WHERE evento.id_disciplina = '$id_disciplina';");
 
 		 if ($query) 
 		{
@@ -171,6 +172,21 @@ require_once('conexion.php');
 		{
 			return false;
 		}
+	}
+
+	public function EliminarEvento($id){
+
+		$conex = new Conexion();
+		$conex->conectar();
+		$query = pg_query("DELETE FROM evento WHERE id = '$id';");
+		if ($query) {
+			
+			return $query;
+		}
+		else{
+			return false;
+		}
+
 	}
 
 

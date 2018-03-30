@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="vista/css/jquery.dataTables.min.css"/> 
+<script type="text/javascript" src="vista/js/jquery.dataTables.min.js"></script>
 <div class="container">
     <div class="row">
         <div class= col-xs-9 tab-content" data-spy="scroll" data-target="#menu" data_offset="0">
@@ -75,10 +77,23 @@
                                     <input type="text" required name="descripcion_part" id="descripcion_part" value="">
                                 </div>
                             </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-4" for="disciplina">Unidad</label>
+                        <div class="col-xs-2">
+                            <select class="form-control" name="select2" id="select2" value=""; >
+                                <option value="0">Seleccionar</option>
+                                <option value="Cultura">Cultura</option>
+                                <option value="Deporte">Deporte</option>
+                                <option value="Gestion">Gestion Comunitaria</option>
+                                <option value="Ninguna">Ninguna</option>
+                            </select>
+                        </div>
+                    </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-4" for="disciplina">Disciplina:</label>
-                                <div id="selector-disciplina" class="col-xs-2"> 
-                                    <select class="form-control" name="id_disciplina" id="id_disciplina" value="" required>
+                                <div class="col-xs-2"> 
+                                    <select class="form-control" name="id_disciplina2" id="id_disciplina2" value="" required>
                                     </select>
                                 </div>
                             </div>

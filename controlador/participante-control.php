@@ -83,35 +83,31 @@ switch ($x){
 		$cedula = $_POST["cedula"];
 		$nombre = $_POST['nombre'];
 		$apellido = $_POST['apellido'];
+		$select2 = $_POST['select2'];
 		$edad = $_POST['edad'];
 		$sexo = $_POST['sexo'];
 		$carrera = $_POST['carrera'];
-		$id_disciplina = $_POST['id_disciplina'];
+		$id_disciplina = $_POST['id_disciplina2'];
 		$correo = $_POST['correo'];
 		$telefono = $_POST['telefono'];
 		$descripcion_part = $_POST['descripcion_part'];
 		$status = $_POST['status'];
 
 
-		$obj_participante = new participante();
-		$validarParticipante = $obj_participante->verificarParticipante($cedula);
-		$validar = pg_fetch_array($validarParticipante);
+		$obj_modificar = new participante();
+		$modificar= $obj_modificar->ModificarParticipante($id, $cedula,$nombre,$apellido,$edad,$sexo,$carrera,$correo,$telefono,$descripcion_part,$id_disciplina,$status);
 
-		if ($validar==0) {
 
-			$obj_modificar = new participante();
-			$modificar= $obj_modificar->ModificarParticipante($id, $cedula,$nombre,$apellido,$edad,$sexo,$carrera,$correo,$telefono,$descripcion_part,$id_disciplina,$status);
-
-			if ($modificar) {
-				echo "ok";
-			}
-			else{
-				echo "error";
-			}
+		if ($modificar) {
+			session_start();
+			$_SESSION['cedula']=$cedula;
+			echo "ok";
 		}
 		else{
 			echo "error";
-			}
+		}
+		
+
 	break;
 
 	case 5: 

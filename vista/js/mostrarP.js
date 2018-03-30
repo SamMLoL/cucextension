@@ -1,42 +1,81 @@
-        function getParameterByName(name) {
-            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-        }
 
-        var cedula = getParameterByName('cedula');
-        
-        function mostrar(){
+         function mostrar(){
+                
+            $.ajax({
+                async:false, 
+                type: "POST",
+                url: "controlador/participante-control.php?x=3",
+                dataType: 'json',
+                data:{id:$('#cambiar').val()}
+
+            }).done(function(respuesta){
+               
+                
+                $('#id').val(respuesta.id);
+                $('#cedula').val(respuesta.cedula);
+                $('#nombre').val(respuesta.nombre);
+                $('#apellido').val(respuesta.apellido);
+                $('#edad').val(respuesta.edad);
+                $('#sexo').val(respuesta.sexo);
+                $('#correo').val(respuesta.correo);
+                $('#carrera').val(respuesta.carrera);
+                $('#telefono').val(respuesta.telefono);
+                $('#select2').val(respuesta.unidad);
+                $('#descripcion_part').val(respuesta.descripcion_part);
+                $('#status').val(respuesta.status);
+                $('#id_disciplina2').val(respuesta.id_disciplina); 
 
 
-        $.ajax({
 
-            type: "POST",
-            url: "controlador/participante-control.php?x=3",
-            dataType: 'json',
-            data:{id:$('#cambiar').val()}
+            }); 
+            
+        };
 
-        }).done(function(respuesta){
 
-            $('#id').val(respuesta.id);
-            $('#cedula').val(respuesta.cedula);
-            $('#nombre').val(respuesta.nombre);
-            $('#apellido').val(respuesta.apellido);
-            $('#edad').val(respuesta.edad);
-            $('#sexo').val(respuesta.sexo);
-            $('#correo').val(respuesta.correo);
-            $('#carrera').val(respuesta.carrera);
-            $('#telefono').val(respuesta.telefono);
-            $('#descripcion_part').val(respuesta.descripcion_part);
-            $('#id_disciplina').val(respuesta.id_disciplina);
-            $('#status').val(respuesta.status);
+       
+    var disci = function(){
 
-        }); 
-    }
+            $.ajax({
+                async:false,
+                type: "POST",
+                url: "controlador/participante-control.php?x=3$unidad=0",
+                dataType: 'json',
+                data:{id:$('#unidad').val()}
+
+            }).done(function(respuesta){
+
+                $("#id_disciplina2").load('controlador/funciones.php?x=1&unidad='+respuesta.unidad);
+
+                });
+
+            
+            
+           
+        };
+
 
 
     $(document).ready(function(){
+
+        $("#select2").change(function(event){
+            var unidad = $("#select2").find(':selected').val();
+            $("#id_disciplina2").load('controlador/funciones.php?x=1&unidad='+unidad);
+         }); 
+       
+
+
+        function haceAlgo(callbackdisci, callbackmostrar){
+            callbackdisci();
+
+            callbackmostrar();
+        }
+
+        haceAlgo(disci, mostrar);
+
+
+        mostrar();
+
+
 
         $("#formuModificar").validate({
                 rules: {
@@ -46,7 +85,8 @@
                     edad: { required: true, digits: true, maxlength:2},
                     sexo: { required: true},
                     carrera: { required: true},
-                    id_disciplina: { required: true},
+                    select2: { required: true},
+                    id_disciplina2: { required: true},
                     correo: { required:true, email: true, minlength: 13, maxlength: 50},
                     telefono: { required: true, digits:true, minlength: 4, maxlength: 25},
                     descripcion_part: { required: true, minlength: 4, maxlength: 40},
@@ -60,7 +100,8 @@
                     edad: "Debe instroducir una edad valida",
                     sexo: "Debe seleccionar un sexo",
                     carrera: "Debe seleccionar una carrera",
-                    id_disciplina: "Debe seleccionar una disciplina.",
+                    select2: "Debe seleccionar una disciplina.",
+                    id_disciplina2: "Debe seleccionar una disciplina.",
                     correo : "Debe introducir un email válido.",
                     telefono: "Debe introducir un telefono valido.",
                     descripcion_part: {required: 'Debe introducir una descripcion.', minlength: 'El mínimo permitido son 4 caracteres.', maxlength: 'El máximo permitido son 40 caracteres.'},
@@ -78,13 +119,15 @@
                         success: function(data){
                           $('#guardar').val('Guardar');
 
-                            if (data == "error") {
-
-                                $("#RespuestaMostrar").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se lograron guardar los datos del participante, verifique los datos ingresados.</div>");
-                            }
+                            if (data == "ok") {
+                                $("#RespuestaMostrar").html("<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Registrado!</strong> Los nuevos datos de participante han sido guardado con exito.</div>");
+        
+                             }
                             else {                         
-                               $("#RespuestaMostrar").html("<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Registrado!</strong> Los nuevos datos de participante han sido guardado con exito.</div>");
-                           }
+                              
+                                $("#RespuestaMostrar").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se lograron guardar los datos del participante, verifique los datos ingresados.</div>");
+                           
+                             }
                         }
                     });
 

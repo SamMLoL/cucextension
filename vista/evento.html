@@ -114,13 +114,35 @@
 
                     <br>
 
-                    <div class="form-group">
-                        <label for="disciplina">Disciplina</label>
-                        <div id="selector-disciplina">
-                            <select class="form-control" name="id_disciplina" required></select>
+                    
+                        <label for="disciplina">Unidad</label>
+                            <select class="form-control" name="UnidadEvento" id="UnidadEvento">
+                                <option value="0" disabled selected>Seleccionar</option>
+                                <option value="Cultura">Cultura</option>
+                                <option value="Deporte">Deporte</option>
+                                <option value="Gestion">Gestion Comunitaria</option>
+                                <option value="Ninguna">Ninguna</option>
+                            </select>
+                        <div class="error" id="error-UnidadEvento"></div>
+
+                    <br>
+                        
+                    
+                     
+                        <label for="disciplina">Disciplina:</label>
+                        
+                        <select class="form-control col-md-6" name="id_disciplina3" id="id_disciplina3" disabled="true">
+                            <option value="0">Seleccionar</option>
+                        </select>
+                        
+                        <div class="btn-group" role="group">
+                            <button title="Agregar nueva disciplina" class=" col-md-4" type="button" id="agregarDis" style="margin: 0px; background-color: transparent; border:1px none;"><img width="35" height="35" src="vista/img/Plus_blue.png"/></button>
+                            <button title="Eliminar una disciplina" class="col-md-4" type="button" id="eliminarDis" style="margin: 0px; background-color: transparent; border:1px none;"><img width="35" height="35" src="vista/img/icono-eliminar.png"/></button>  
                         </div>
-                        <div class="error" id="error-id_disciplina"></div>
-                    </div> 
+                        
+                    
+                    <br>
+                    <br>
                     <br>
 
                     <label for="body">Descripcion</label>
@@ -149,21 +171,132 @@
                 </div> 
                 <div class="modal-body">
                     <form class="form-horizontal" action="controlador/funciones.php?x=8" role="form" id="EventoEliminar" method="POST">
-                        <div class="form-group">
-                            <label class="control-label col-xs-5" for="nombre-evento">Nombre del evento:</label>
-                            <div class="col-xs-5 frmSearch">
-                                <input type="text" class="form-control" name="nombre-evento" id="nombre-evento">
-                                <div id="suggesstion-box"></div>
-                            </div>
-                        </div> 
+
+
+                        <label for="disciplina">Unidad</label>
+                            <select class="form-control" name="UnidadEliminar" id="UnidadEliminar">
+                                <option value="0" disabled selected>Seleccionar</option>
+                                <option value="Cultura">Cultura</option>
+                                <option value="Deporte">Deporte</option>
+                                <option value="Gestion">Gestion Comunitaria</option>
+                            </select>
+                        <div class="error" id="error-UnidadEvento"></div>
+
+                    <br>
+                        
+                    
+                        <label for="disciplina">Disciplina:</label>
+                        
+                        <select class="form-control" name="id_disciplina4" id="id_disciplina4" disabled="true">
+                            <option value="0">Seleccionar</option>
+                        </select>
+                        <br>
+                        <label for="disciplina">Evento:</label>
+                        
+                        <select class="form-control" name="nombre-evento" id="nombre-evento" disabled="true">
+                            <option value="0">Seleccionar</option>
+                        </select>
+
 
                         <div id="EliminarRespuesta"></div>
+                        <div class="modal-footer">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    <span class="hidden-xs"> Cerrar</span>
+                                </button>
+                                <button type="submit" id="EliminarNombre" name="EliminarNombre" class="btn btn-danger" onclick="return confirm('¿Estas seguro que quieres eliminar este evento?')">
+                                    <span class="glyphicon glyphicon-trash"></span><span class="hidden-xs"> Eliminar</span>
+                                </button>
+                            </div>
+                            <dir id="resp"></dir>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="ModalAgregarDisciplina" class="modal fade" role="dialog"> 
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button class="close" aria-hidden="true" data-dismiss="modal">&times;</button> 
+                    <h3 class="modal-tittle">Agregar Disciplina</h3>
+                </div> 
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" id="formdisciplina" method="POST">
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="disciplina">Unidad</label>
+                            <div class="col-xs-5">
+                                <select class="form-control" name="unidad" id="unidad">
+                                    <option value="0" selected disabled>Seleccionar</option>
+                                    <option value="Cultura">Cultura</option>
+                                    <option value="Deporte">Deporte</option>
+                                    <option value="Gestion">Gestion Comunitaria</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Disciplina:</label>
+                            <div class="col-xs-5">
+                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                            </div>
+                        </div> 
                 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">
-                                <span class="hidden-xs"> Cerrar</span>
+                                <span class="glyphicon glyphicon-remove"></span><span class="hidden-xs"> Cerrar</span>
                             </button>
-                            <button type="submit" id="EliminarNombre" name="EliminarNombre" class="btn btn-danger" onclick="return confirm('¿Estas seguro que quieres eliminar este evento?')">
+                            <button type="submit" id="GuardarNombre" name="GuardarNombre" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-floppy-saved"></span><span class="hidden-xs"> Guardar</span>
+                            </button>
+                        </div>
+                        <dir id="resp"></dir>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- MODAL ELIMINAR DISCIPLINA -->
+    <div id="ModalEliminarDisciplina" class="modal fade" role="dialog"> 
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button class="close" aria-hidden="true" data-dismiss="modal">&times;</button> 
+                    <h3 class="modal-tittle">Eliminar Disciplina</h3>
+                </div> 
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" id="formEliminar" method="POST">
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="disciplina">Unidad</label>
+                        <div class="col-xs-5">
+                            <select class="form-control" name="Selectunidad" id="Selectunidad">
+                                <option value="0" disabled selected>Seleccionar</option>
+                                <option value="Cultura">Cultura</option>
+                                <option value="Deporte">Deporte</option>
+                                <option value="Gestion">Gestion Comunitaria</option>
+                                <option value="Ninguna">Ninguna</option>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="control-label col-xs-3" for="disciplina">Disciplina</label>
+                        <div class="col-xs-5">
+                            <select class="form-control" name="id_disciplina2" id="id_disciplina2" disabled="true">
+                            <option value="0">Seleccionar</option>
+                        </select>
+                        </div>
+                    </div>
+                        <div id="respEliminar"></div>
+                
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-remove"></span><span class="hidden-xs"> Cerrar</span>
+                            </button>
+                            <button type="submit" id="EliminarNombre" name="EliminarNombre" class="btn btn-danger" onclick="return confirm('¿Estas seguro que quieres eliminar esta disciplina?')">
                                 <span class="glyphicon glyphicon-trash"></span><span class="hidden-xs"> Eliminar</span>
                             </button>
                         </div>
@@ -173,5 +306,4 @@
             </div>
         </div>
     </div>
-
 

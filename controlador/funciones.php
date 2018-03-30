@@ -10,8 +10,10 @@ if(array_key_exists('x', $_GET)){
 switch ($x){
 //funcion SELECT DE DISCIPLINA
 	case 1:  
+    $unidad=htmlspecialchars(urldecode(($_GET['unidad'])));
+
     $obj_buscar = new objetos();
-	    $all= $obj_buscar->selectdis();
+	    $all= $obj_buscar->selectdis($unidad);
 	    echo '<option disabled value="0" selected>Seleccionar</option>';
 	    while ( $row = pg_fetch_assoc($all) )    
 	        {
@@ -26,13 +28,14 @@ switch ($x){
 	case 2: 
 
 			$descripcion = $_POST["nombre"];
+            $unidad = $_POST["unidad"];
 			$obj_registrar = new objetos();
             $validarDisciplina = $obj_registrar->verificarDisciplina($descripcion);
             $validar = pg_fetch_array($validarDisciplina);
 
                 if($validar==0){
 
-                	$crear = $obj_registrar->RegistrarDisciplina($descripcion);
+                	$crear = $obj_registrar->RegistrarDisciplina($descripcion, $unidad);
 
 					if ($crear) {
 						echo "<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Registrado!</strong> la nueva disciplina ha sido ha registrada exitosamente.</div>";
@@ -50,7 +53,7 @@ switch ($x){
 
 //FUNCION Eliminar DISCIPLINA
 	case 3:
-			$id_disciplina = $_POST["id_disciplina"];
+			$id_disciplina = $_POST["id_disciplina2"];
 			$obj_eliminar = new objetos();
         	$eliminar = $obj_eliminar->EliminarDisciplina($id_disciplina);
 
@@ -85,7 +88,7 @@ switch ($x){
             $titulo = evaluar($_POST['title']);
 
             $contenido  = evaluar($_POST['event']);
-            $id_disciplina  = evaluar($_POST['id_disciplina']);
+            $id_disciplina  = evaluar($_POST['id_disciplina3']);
             $clase  = evaluar($_POST['class']);
 
             $obj_evento = new objetos();
@@ -124,19 +127,19 @@ switch ($x){
     $class=$row['class'];
 
         switch ($class) {
-        case "event-info     ":
+        case "event-info":
             $tipo="Informativo";
         break;
-        case "event-success  ":
+        case "event-success":
             $tipo="Deportivo";
         break;
         case "event-important":
             $tipo="Artistico";
         break;
-        case "event-warning  ":
+        case "event-warning":
             $tipo="Cultural";
         break;
-        case "event-special  ":
+        case "event-special":
             $tipo="Especial";
         break;
 
@@ -193,46 +196,39 @@ switch ($x){
 
     case 7:
 
-        $evento= $_POST['keyword'];
+        $id_disciplina= htmlspecialchars(urldecode(($_GET['id_disciplina'])));
 
         $obj_evento = new objetos();
-        $resultado = $obj_evento->AutocompeteEventos($evento);
+        $resultado = $obj_evento->AutocompeteEventos($id_disciplina);
+
+        echo '<option disabled value="0" selected>Seleccionar</option>';
+
+        while ( $row = pg_fetch_assoc($resultado) )    
+            {
+
+                echo '<option value="'.$row['id'].'">'.$row['title'].'</option>';
+
+            }
 
 
-        while ($row=pg_fetch_assoc($resultado)) {
-            
-            $datos[] = $row;
-
-        }
-        if(!empty($datos)) {
-        ?>
-        <ul id="country-list">
-        <?php
-        foreach($datos as $country) {
-        ?>
-        <li onClick="selectCountry('<?php echo $country["title"]; ?>');"><?php echo $country["title"]; ?></li>
-        <?php } ?>
-        </ul>
-        <?php } 
 
     break;
 
     case 8:
         
-        $title = $_POST['nombre-evento'];
+        $id = $_POST['nombre-evento'];
 
-        $sql = "DELETE FROM evento WHERE title = '$title';";
-        $conexion = new Conexion();
-        $conexion->conectar();
-        if ($obj_conex=pg_query($sql)) 
-        {
-            echo "Evento eliminado";
+        $obj_evento = new objetos();
+        $EliminarEvento = $obj_evento->EliminarEvento($id);
+
+
+        if ($EliminarEvento) {
+            echo "<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Eliminado!</strong> la disciplina ha sido ha eliminada exitosamente.</div>";
         }
-        else
-        {
-            echo "El evento no se pudo eliminar";
+        else {
+            echo "<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se pudo eliminar la disciplina, la disciplina puede tener registros que no se pueden borrar</div>";
         }
-         
+     
 
 
     break;

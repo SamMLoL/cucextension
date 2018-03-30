@@ -211,7 +211,7 @@ $(document).ready(function(){
 
 
 
-    $("#nombre-evento").keyup(function(){
+  /*  $("#nombre-evento").keyup(function(){
         $.ajax({
         type: "POST",
         url: "controlador/funciones.php?x=7",
@@ -225,11 +225,82 @@ $(document).ready(function(){
             $("#nombre-evento").css("background","#FFF");
         }
         });
-    });
+    }); */
+
+    SeleccionarDis();
+
+    $('#UnidadEvento').on('change', function(){
+        var valor = $("#UnidadEvento").val();
+        if (valor === 0 || valor === true){
+            $("#id_disciplina3").attr('disabled', true);
+
+        }else{
+            $("#id_disciplina3").attr('disabled', false);
+    
+        }
+    })
+
+        $('#UnidadEliminar').on('change', function(){
+        var valor = $("#UnidadEliminar").val();
+        if (valor === 0 || valor === true){
+            $("#id_disciplina4").attr('disabled', true);
+
+        }else{
+            $("#id_disciplina4").attr('disabled', false);
+    
+        }
+        })
+
+        $('#id_disciplina4').on('change', function(){
+        var valor = $("#id_disciplina4").val();
+        if (valor === 0 || valor === true){
+            $("#nombre-evento").attr('disabled', true);
+
+        }else{
+            $("#nombre-evento").attr('disabled', false);
+    
+        }
+        })
+SelectEliminarEventos();
+
+SelectEventos();
 });
 
-function selectCountry(val) {
-$("#nombre-evento").val(val);
-$("#suggesstion-box").hide();
-}
 
+
+
+/*
+    function selectCountry(val) {
+    $("#nombre-evento").val(val);
+    $("#suggesstion-box").hide();
+    } */
+
+
+        var SeleccionarDis = function(){
+
+
+                $("#UnidadEvento").change(function(event){
+                    var unidad = $("#UnidadEvento").find(':selected').val();
+                    $("#id_disciplina3").load('controlador/funciones.php?x=1&unidad='+unidad);
+                });
+        }
+        var SelectEliminarEventos = function(){
+
+
+                $("#UnidadEliminar").change(function(event){
+                    var unidad = $("#UnidadEliminar").find(':selected').val();
+                    $("#id_disciplina4").load('controlador/funciones.php?x=1&unidad='+unidad);
+                });
+        }
+        var SelectEventos = function(){
+
+
+                $("#id_disciplina4").change(function(event){
+                    var id_disciplina = $("#id_disciplina4").find(':selected').val();
+                    $("#nombre-evento").load('controlador/funciones.php?x=7&id_disciplina='+id_disciplina);
+                });
+        }
+        
+
+
+        
