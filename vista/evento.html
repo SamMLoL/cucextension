@@ -36,8 +36,42 @@
                             <div class="modal fade" id="events-modal">
                                 <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <div class="modal-body" style="height: 400px">
+                                            <div class="modal-body" id="modalevento" style="height: 400px">
                                                 
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button title='Consultar participantes' id='modallistaparticipantes' type='button' class='btn btn-primary'>Consultar los participantes </button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+
+                            <!--ventana modal para el participantes-->
+                            <div class="modal fade" id="participantesmodal">
+                                                            <script>
+                            $(document).ready(function() {
+
+
+                                });
+
+                            </script>
+                                <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body" id="modalparticipantes" style="height: 400px">
+                                                <table class="table table-hover table-inverse">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Cedula</th>
+                                                            <th>Nombre</th>
+                                                            <th>Apellido</th>
+                                                            <th>Carrera</th>
+                                                        </tr> 
+                                                        </thead>
+                                                        <tbody id="tablaEventos">
+
+                                                    </tbody>
+                                                </table>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -193,12 +227,12 @@
                         <br>
                         <label for="disciplina">Evento:</label>
                         
-                        <select class="form-control" name="nombre-evento" id="nombre-evento" disabled="true">
+                        <select class="form-control" name="nombreevento" id="nombreevento" disabled="true">
                             <option value="0">Seleccionar</option>
                         </select>
 
 
-                        <div id="EliminarRespuesta"></div>
+                        <div id="EliminarEventoRespuesta"></div>
                         <div class="modal-footer">
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -208,7 +242,6 @@
                                     <span class="glyphicon glyphicon-trash"></span><span class="hidden-xs"> Eliminar</span>
                                 </button>
                             </div>
-                            <dir id="resp"></dir>
                         </div>
                     </form>
                 </div>
@@ -261,7 +294,7 @@
         </div>
     </div>
 <!-- MODAL ELIMINAR DISCIPLINA -->
-    <div id="ModalEliminarDisciplina" class="modal fade" role="dialog"> 
+    <div id="ModalEliminarDisciplina" class="modal fade"> 
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

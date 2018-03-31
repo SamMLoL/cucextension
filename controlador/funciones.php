@@ -96,8 +96,7 @@ switch ($x){
 
 
             if ($evento) {
-                echo "ok";
-
+                echo "1";
             }
             else {
                 echo "error";
@@ -117,12 +116,13 @@ switch ($x){
 
     $row = pg_fetch_assoc($evento);
 
-
+    $id=$row['id'];
     $titulo=$row['title'];
     $evento=$row['body'];
     $inicio=$row['inicio_normal'];
     $final=$row['final_normal'];
     $disciplina=$row['descripcion'];
+    $id_disciplina=$row['id_disciplina'];
 
     $class=$row['class'];
 
@@ -148,13 +148,26 @@ switch ($x){
     echo "
         <link rel=\"stylesheet\" type=\"text/css\" href=\"../vista/css/bootstrap.min.css\">
         <script src=\"../vista/js/bootstrap.min.js\"></script>
+        <script src=\"../vista/js/jquery-3.3.1.min.js\"></script>
          <h3>".$titulo."</h3>
          <hr>
          <b>Fecha inicio:</b> ".$inicio."
          <b>Fecha termino:</b> ".$final."
          <b>Descripcion: </b><p>".$evento."</p>
         <b>tipo de evento:</b> ".$tipo."
-        <br><b>Disciplina:</b> ".$disciplina;  
+        <br><b>Disciplina:</b> ".$disciplina;
+
+        session_start();
+        $_SESSION['id_disciplina']= $id_disciplina;
+      /*  <br><center><br><button title='Consultar participantes' id='".$id."' type='button' class='btn btn-primary'>Consultar los participantes </button>  
+
+        <script>
+            $(\"".$id."\").on('click',function(){
+                $('#modalparticipantes').load('controlador/funciones.php?x=9&id_disciplina=".$id_disciplina."',function(){
+                    $('#participantes-modal').modal({show:true});
+                });
+            });
+        </script>."; */
 
     break;
 	
@@ -216,22 +229,23 @@ switch ($x){
 
     case 8:
         
-        $id = $_POST['nombre-evento'];
+        $id = $_POST['nombreevento'];
 
         $obj_evento = new objetos();
         $EliminarEvento = $obj_evento->EliminarEvento($id);
 
 
         if ($EliminarEvento) {
-            echo "<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Eliminado!</strong> la disciplina ha sido ha eliminada exitosamente.</div>";
+            echo "1";
         }
         else {
-            echo "<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se pudo eliminar la disciplina, la disciplina puede tener registros que no se pueden borrar</div>";
+            echo "error";
         }
      
 
 
     break;
+    case 8:
 
 
 	}

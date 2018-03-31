@@ -138,6 +138,27 @@ switch ($x){
 	}
 
 	break;
+
+	case 7:
+		session_start();
+		$id_disciplina = $_SESSION['id_disciplina'];
+
+		$obj_participantes = new participante();
+		$todos = $obj_participantes->ParticipanteDisciplina($id_disciplina);
+		if (!$todos) {
+			die("error");
+		}
+		else{
+
+			while ($data = pg_fetch_assoc($todos)) {
+				echo "<tr><td>" . $data['cedula'].  "</td><td>" . $data['nombre']. "</td><td>" . $data['apellido']."</td><td>" . $data['carrera']. "</td></tr>";
+			};
+			
+		}
+
+		
+
+	break;
 	
 
 	}

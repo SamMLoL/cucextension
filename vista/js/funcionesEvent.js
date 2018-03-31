@@ -182,8 +182,8 @@ $(document).ready(function(){
                         url:"controlador/funciones.php?x=4",
                         data: $("#formuEventos").serialize(),
                         success: function(data){
-                            console.log(data);
-                            if (data = 'ok') {
+                            
+                            if (data ==1) {
                                 alert("El evento ha sido agregado con exito");
                                 $(location).attr('href','eventos');
                             } 
@@ -207,25 +207,54 @@ $(document).ready(function(){
             }
             });
 
+            $("#EventoEliminar").validate({
+                rules: {
+                    UnidadEliminar: { required: true},
+                    id_disciplina4:  { required: true},
+                    nombreevento: { required: true},
+
+                },
+                messages: {
+                    UnidadEliminar: "Debe seleccionar una unidad para elegir una disciplina",
+                    id_disciplina4: "Debe seleccionar una displina",
+                    nombreevento: "Debe seleccionar un evento",
+
+                },
+                submitHandler: function(form){
+                    $.ajax({
+                        type: "POST",
+                        url:"controlador/funciones.php?x=8",
+                        data: $("#EventoEliminar").serialize(),
+                        success: function(data){
+                            
+                            if (data ==1) {
+                                alert("El evento ha sido eliminado con exito");
+                                $(location).attr('href','eventos');
+                            } 
+                            else {    
+                                $("#EliminarEventoRespuesta").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se pudo eliminar el evento, la disciplina puede tener registros que no se pueden borrar</div>");
+                                                 
+                            }
+                        }
+                    });
+
+                    return false
+                },
+                errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                  if (placement) {
+                    $(placement).append(error)
+                  } else {
+                    var inputName = $(element).attr('name')
+                    $('#error-'+inputName).append(error)
+                  }
+            }
+            });
 
 
 
 
-  /*  $("#nombre-evento").keyup(function(){
-        $.ajax({
-        type: "POST",
-        url: "controlador/funciones.php?x=7",
-        data:'keyword='+$(this).val(),
-        beforeSend: function(){
-            $("#nombre-evento").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
-        },
-        success: function(data){
-            $("#suggesstion-box").show();
-            $("#suggesstion-box").html(data);
-            $("#nombre-evento").css("background","#FFF");
-        }
-        });
-    }); */
+
 
     SeleccionarDis();
 
@@ -254,26 +283,25 @@ $(document).ready(function(){
         $('#id_disciplina4').on('change', function(){
         var valor = $("#id_disciplina4").val();
         if (valor === 0 || valor === true){
-            $("#nombre-evento").attr('disabled', true);
+            $("#nombreevento").attr('disabled', true);
 
         }else{
-            $("#nombre-evento").attr('disabled', false);
+            $("#nombreevento").attr('disabled', false);
     
         }
-        })
-SelectEliminarEventos();
+    })
+    SelectEliminarEventos();
 
-SelectEventos();
+    SelectEventos();
+
+
+        $(document).on('click', '#modallistaparticipantes', function() {
+            $('#participantesmodal').modal('show');
+            $("#tablaEventos").load('controlador/participante-control.php?x=7');
+        });
 });
 
 
-
-
-/*
-    function selectCountry(val) {
-    $("#nombre-evento").val(val);
-    $("#suggesstion-box").hide();
-    } */
 
 
         var SeleccionarDis = function(){
@@ -297,7 +325,7 @@ SelectEventos();
 
                 $("#id_disciplina4").change(function(event){
                     var id_disciplina = $("#id_disciplina4").find(':selected').val();
-                    $("#nombre-evento").load('controlador/funciones.php?x=7&id_disciplina='+id_disciplina);
+                    $("#nombreevento").load('controlador/funciones.php?x=7&id_disciplina='+id_disciplina);
                 });
         }
         

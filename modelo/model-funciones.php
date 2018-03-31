@@ -181,7 +181,7 @@ require_once('conexion.php');
 		$query = pg_query("DELETE FROM evento WHERE id = '$id';");
 		if ($query) {
 			
-			return $query;
+			return true;
 		}
 		else{
 			return false;

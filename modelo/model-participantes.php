@@ -189,6 +189,34 @@ class participante{
 			return false;
 		}
 	}
+		public function ParticipanteDisciplina($id_disciplina)
+	{
+		$conex = new Conexion();
+		$conex->conectar();
+
+		$query = pg_query("SELECT 
+		  participantes.nombre, 
+		  participantes.apellido, 
+		  participantes.carrera, 
+		  participantes.cedula, 
+		  participantes.id_disciplina 
+		FROM 
+		  public.participantes 
+		WHERE
+
+		 participantes.id_disciplina = '$id_disciplina'
+ 		ORDER BY
+  		  participantes.cedula ASC;");
+
+		if ($query) 
+		{
+			return $query;			
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 	public function EliminarParticipante($id)
 	{
