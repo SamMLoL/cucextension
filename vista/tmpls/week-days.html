@@ -1,12 +1,14 @@
-<% _.each(events, function(event){ %>
+<% variable=0;
+_.each(events, function(event) { 
+variable++; %>
 <div class="cal-row-fluid">
 	<div class="cal-cell<%= event.days%> cal-offset<%= event.start_day %> day-highlight dh-<%= event['class'] %>" data-event-class="<%= event['class'] %>">
-                <button title="<%= event.title %>" id="<%= event.title %>" class="<%= event.url ? event.url : 'javascript:void(0)' %>" type="button" style="margin: 0px; background-color: transparent; border:1px none;"><%= event.title %> </button>  
+                <button title="<%= event.title %>" class="<%= variable %>" type="button" style="margin: 0px; background-color: transparent; border:1px none;"><%= event.title %> </button>  
 
 	</div>
 </div>
 	<script>
-		$(".<%= event.url ? event.url : 'javascript:void(0)' %>").on('click',function(){
+		$('.<%= variable %>').on('click',function(){
 		    $('#modalevento').load("<%= event.url ? event.url : 'javascript:void(0)' %>",function(){
 		        $('#events-modal').modal({show:true});
 		    });

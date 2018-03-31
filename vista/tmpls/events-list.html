@@ -1,11 +1,11 @@
 <span id="cal-slide-tick" style="display: none"></span>
 <div id="cal-slide-content" class="cal-event-list">
 	<ul class="unstyled list-unstyled" data-toggle="tooltip">
-		<% _.each(events, function(event) { 
-		variable=1;
-		variable= variable + 1; %>
+		<% variable=0; 
+		_.each(events, function(event) { 
+		variable++; %>
 			<li>
-				<span class="pull-left event <%= event['class']%>" data-toggle="tooltip"></span>&nbsp;	
+				<span class="pull-left event <%= event['class'] %>" data-toggle="tooltip"></span>&nbsp;	
                 <button title="<%= event.title %>" class="<%= variable %>" type="button" style="margin: 0px; background-color: transparent; border:1px none;"><%= event.title %> </button>  
 			</li>
 			<script>

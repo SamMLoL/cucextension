@@ -5,9 +5,7 @@
 		<div class="events-list" data-cal-start="<%= start %>" data-cal-end="<%= end %>">
 			<% _.each(events, function(event) { %>
 
-				<a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>" data-event-class="<%= event['class'] %>"
-					class="pull-left event <%= event['class'] %>" data-toggle="tooltip"
-					title="<%= event.title %>"></a>
+				<a class="pull-left event <%= event['class'] %>" title="<%= event.title %>"></a>
 			<% }); %>
 		</div>
 	<% } %>
