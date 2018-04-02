@@ -20,8 +20,6 @@ if(!isset($_SESSION['id'])) {
 
 
 
-
-
 switch ($x){
 
 	case 100:
@@ -54,23 +52,39 @@ switch ($x){
 		echo $html; 
 	break;
 
-	
-// Funciones de Eventos
+
+// Funciones Profesores
 	case 6: 
+		$html = file_get_contents('../vista/v3.html');
+		echo $html; 
+	break;
+	case 7:
+		$html = file_get_contents('../vista/agregar-profesores.html');
+		echo $html; 
+		break;
+	case 8: 
+		$html = file_get_contents('../vista/consultar-profesores.html');
+		echo $html; 
+	break;
+	case 9: 
+		$html = file_get_contents('../vista/mostrar-profesor.html');
+		echo $html; 
+	break;
+	case 10: 
+		$html = file_get_contents('../vista/lista-profesores.html');
+		echo $html; 
+	break;
+
+
+
+// Funciones de Eventos
+	case 11: 
 
 		$html = file_get_contents('../vista/evento.html');
 		echo $html; 
 
 	break;
 
-	case 10: 
-		$html = file_get_contents('../vista/agregarPro.html');
-		echo $html; 
-	break;
-	case 11: 
-		$html = file_get_contents('../vista/ConsultarPro.html');
-		echo $html; 
-	break;
 
 	default: 
 		$html = file_get_contents('../vista/v1.html');

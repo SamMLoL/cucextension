@@ -1,0 +1,52 @@
+<script src="vista/js/funciones.js"></script>
+<div class="container col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-offset-1 col-sm-10 col-xs-12 ">
+	<div class="row">
+		<div class="col-md-9 col-sm-9 col-xs-6 tab-content" data-spy="scroll" data-target="#menu" data_offset="0">
+			<div class=" tab-pane in active" id="cd2">	
+				<div class="panel panel-info tab-pane" id="cd2" >
+					<div class="panel-heading">Consultar Profesores</div>
+						<div class="panel-body image-consulta">
+							<div class="contenido">
+								<img src="vista/img/consultar.png" alt="consulta" class="image" style="width:100%">
+								<div class="middleconsulta">
+									<div class="h2-consulta">				
+										<a href="lista-profesores"><button style="float:left;margin-left:40px;" class="btn btn-info bt btn-lg btn-block" >Consultar Profesores</button></a>
+											<br>
+											<br>
+											<br>
+										<form class="form-horizontal" id="buscarProfesor"  role="form"  method="POST">
+											<div class="form-group">
+												<div class="col-xs-8">
+													<input type="text" class="form-control" name="cedula1" placeholder="Cedula"/>
+												</div>
+												<div class="col-xs-4">
+													<input type="submit" style="width:150px; height:35px;" class="btn btn-info" name="buscarPro" id="buscarPro" tabindex="4" value="Buscar Participante">
+												</div>
+											</div>
+											<div id="respbuscar"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+			<div class="col-md-3 col-sm-3 col-xs-3">
+
+                <ul class="nav flex-column">
+					<h4>Opciones</h4>
+	              <li class="nav-item">
+	                  <a class="nav-link active" href="profesores">Inicio</a>
+	                </li>
+	                <li class="nav-item">
+	                  <a class="nav-link" href="agregar-profesores">Agregar</a>
+	                </li>
+	                <li class="nav-item">
+	                  <a class="nav-link" href="consultar-profesores">Consultar</a>
+	              </li>
+				</ul>
+			</div>
+	</div>
+</div>
+

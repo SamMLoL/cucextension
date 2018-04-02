@@ -163,6 +163,69 @@
                 }
             });
 
+
+
+
+
+            //FUNCIONES PROFESORES
+            $("#formuProfesores").validate({
+                rules: {
+                    cedula: { required: true, digits: true, minlength: 7, maxlength: 9},
+                    nombre:  { required: true, minlength: 4, maxlength: 25},
+                    apellido: { required: true, minlength: 4, maxlength: 25},
+                    edad: { required: true, digits: true},
+                    sexo: { required: true},
+                    select1: {required: true},
+                    id_disciplina: { required: true},
+                    telefono: { required: true, digits:true, minlength: 4, maxlength: 25},
+                    status: { required: true}
+
+                },
+                messages: {
+                    cedula: "Debe instroducir una cedula valida",
+                    nombre: {required: 'Debe introducir un nombre.' , minlength: 'El mínimo permitido son 4 caracteres.', maxlength: 'El máximo permitido son 25 caracteres.'},
+                    apellido: {required: 'Debe introducir el apellido.', minlength: 'El mínimo permitido son 4 caracteres.', maxlength: 'El máximo permitido son 25 caracteres.'},
+                    edad: "Debe instroducir una edad valida",
+                    sexo: "Debe seleccionar un sexo",
+                    select1: "Debe seleccionar una unidad luego una disciplina.",
+                    id_disciplina: "Debe seleccionar una disciplina.",
+                    telefono: "Debe introducir un telefono valido.",
+                    status: "Debe seleccionar un estatus",
+
+                },
+                submitHandler: function(form){
+                    $.ajax({
+                        type: "POST",
+                        url:"controlador/profesor-control.php?x=1",
+                        data: $("#formuProfesores").serialize(),
+                        beforeSend:function(){
+                            $('#registrar').val('Conectando...');
+                        },
+                        success: function(data){
+                          $('#registrar').val('Registrar');
+
+                            if (data == "error") {
+
+                                $("#respRegistro").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se logro registrar el profesor, la cedula puede estar ya registrada</div>");
+                            }
+                            else {                         
+                                alert("El profesor ha sido registrado con exito");
+                                var cedula = data;
+                                ModicarProfesor(cedula);
+                           }
+                        }
+                    });
+
+                    return false
+                }
+            });
+
+
+
+
+
+
+
     });
 
 
@@ -328,6 +391,38 @@
 
             },
          });
+        $("#buscarProfesor").validate({
+            rules: {
+                cedula1: { required: true, digits: true, minlength: 7, maxlength: 9}
+            },
+            messages: {
+               
+               cedula1: 'Debe instroducir una cedula valida.',
+            },
+            submitHandler: function(form){
+                $.ajax({
+                    type: "POST",
+                    url:"controlador/profesor-control.php?x=2",
+                    data: $("#buscarProfesor").serialize(),
+                    beforeSend:function(){
+                        $('#buscarPro').val('Buscando...');
+                    },
+                    success: function(data){
+                        if (data!=0) {
+                            $(location).attr('href','mostrar-profesor');
+                        } else {
+                            $("#respbuscar").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> Cedula no encontrada.</div>");
+                            $('#buscarPro').val('Buscar Participante');
+                        }
+
+                    }
+                });
+
+                return false
+
+            },
+         });
+
 
  
     });
@@ -354,9 +449,26 @@
                 url:   'controlador/participante-control.php?x=2', 
                 type:  'post', 
                 success:  function (response) { 
-                        console.log(response)
+                    console.log(response);
                         $(location).attr('href','mostrar-participante');
                 }
         });
 
  };
+
+ var ModicarProfesor = function(cedula){
+    var parametros = {
+                "cedula1" : cedula,
+        };
+
+        $.ajax({
+                data: parametros,
+                url:   'controlador/profesor-control.php?x=2', 
+                type:  'post', 
+                success:  function (response) { 
+                    console.log(response);
+                        $(location).attr('href','mostrar-profesor');
+                }
+        });
+
+ }

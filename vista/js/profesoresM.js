@@ -1,10 +1,9 @@
-
-         function mostrar(){
+         function mostrarProfesor(){
                 
             $.ajax({
                 async:false, 
                 type: "POST",
-                url: "controlador/participante-control.php?x=3",
+                url: "controlador/profesor-control.php?x=3",
                 dataType: 'json',
                 data:{id:$('#cambiar').val()}
 
@@ -17,28 +16,24 @@
                 $('#apellido').val(respuesta.apellido);
                 $('#edad').val(respuesta.edad);
                 $('#sexo').val(respuesta.sexo);
-                $('#correo').val(respuesta.correo);
-                $('#carrera').val(respuesta.carrera);
                 $('#telefono').val(respuesta.telefono);
                 $('#select2').val(respuesta.unidad);
-                $('#descripcion_part').val(respuesta.descripcion_part);
                 $('#status').val(respuesta.status);
                 $('#id_disciplina2').val(respuesta.id_disciplina); 
 
 
-
+ 
             }); 
             
         };
 
-
        
-    var disci = function(){
+    var disciP = function(){
 
             $.ajax({
                 async:false,
                 type: "POST",
-                url: "controlador/participante-control.php?x=3$unidad=0",
+                url: "controlador/profesor-control.php?x=3",
                 dataType: 'json',
                 data:{id:$('#unidad').val()}
 
@@ -46,16 +41,11 @@
 
                 $("#id_disciplina2").load('controlador/funciones.php?x=1&unidad='+respuesta.unidad);
 
-                });
-
-            
-            
-           
+                });  
         };
 
-
-
     $(document).ready(function(){
+
 
         $("#select2").change(function(event){
             var unidad = $("#select2").find(':selected').val();
@@ -64,32 +54,28 @@
        
 
 
-        function haceAlgo(callbackdisci, callbackmostrar){
-            callbackdisci();
+        function haceAlgo(callbackdisciP, callbackmostrarProfesor){
+            callbackdisciP();
 
-            callbackmostrar();
+            callbackmostrarProfesor();
         }
 
-        haceAlgo(disci, mostrar);
+        haceAlgo(disciP, mostrarProfesor);
 
 
-        mostrar();
+        mostrarProfesor();    
 
 
-
-        $("#formuModificar").validate({
+        $("#ModificarProfesor").validate({
                 rules: {
                     cedula: { required: true, digits: true, minlength: 7, maxlength: 9},
                     nombre:  { required: true, minlength: 4, maxlength: 25},
                     apellido: { required: true, minlength: 4, maxlength: 25},
                     edad: { required: true, digits: true, maxlength:2},
                     sexo: { required: true},
-                    carrera: { required: true},
                     select2: { required: true},
                     id_disciplina2: { required: true},
-                    correo: { required:true, email: true, minlength: 13, maxlength: 50},
                     telefono: { required: true, digits:true, minlength: 4, maxlength: 25},
-                    descripcion_part: { required: true, minlength: 4, maxlength: 40},
                     status: { required: true}
 
                 },
@@ -99,20 +85,17 @@
                     apellido: {required: 'Debe introducir el apellido.', minlength: 'El mínimo permitido son 4 caracteres.', maxlength: 'El máximo permitido son 25 caracteres.'},
                     edad: "Debe instroducir una edad valida",
                     sexo: "Debe seleccionar un sexo",
-                    carrera: "Debe seleccionar una carrera",
                     select2: "Debe seleccionar una disciplina.",
                     id_disciplina2: "Debe seleccionar una disciplina.",
-                    correo : "Debe introducir un email válido.",
                     telefono: "Debe introducir un telefono valido.",
-                    descripcion_part: {required: 'Debe introducir una descripcion.', minlength: 'El mínimo permitido son 4 caracteres.', maxlength: 'El máximo permitido son 40 caracteres.'},
                     status: "Debe seleccionar un estatus",
 
                 },
                 submitHandler: function(form){
                     $.ajax({
                         type: "POST",
-                        url:"controlador/participante-control.php?x=4",
-                        data: $("#formuModificar").serialize(),
+                        url:"controlador/profesor-control.php?x=4",
+                        data: $("#ModificarProfesor").serialize(),
                         beforeSend:function(){
                             $('#guardar').val('Conectando...');
                         },
@@ -120,12 +103,12 @@
                           $('#guardar').val('Guardar');
 
                             if (data == "ok") {
-                                $("#RespuestaMostrar").html("<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Registrado!</strong> Los nuevos datos del participante han sido guardado con exito.</div>");
+                                $("#RespuestaMostrar").html("<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Registrado!</strong> Los nuevos datos del profesor han sido guardado con exito.</div>");
         
                              }
                             else {                         
                               
-                                $("#RespuestaMostrar").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se lograron guardar los datos del participante, verifique los datos ingresados.</div>");
+                                $("#RespuestaMostrar").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> No se lograron guardar los datos del profesor, verifique los datos ingresados.</div>");
                            
                              }
                         }
@@ -134,30 +117,26 @@
                     return false
                 }
             });
+        lista();
+    });
 
-
-
-    })
-
-
-//FUNCIONES LISTA
-$(document).ready( function () {
-    lista();
-});
-var status_simple = function ( data ) {
+    var status_simple = function ( data ) {
     if (data=='t') {
     return 'Activo';
     }
     else{
         return 'Inactivo'
+    };
     }
-}
+
+
+
 var lista = function(){
-    var table = $("#todosParticipantes").DataTable({
+    var table = $("#todosProfesores").DataTable({
         "destroy":true,
         "ajax":{
             "method": "POST",
-            "url": "controlador/participante-control.php?x=5"
+            "url": "controlador/profesor-control.php?x=5"
         },
         "columns":[
             {"data":"id"},
@@ -166,13 +145,10 @@ var lista = function(){
             {"data":"apellido"},
             {"data":"edad"},
             {"data":"sexo"},
-            {"data":"carrera"},
-            {"data":"correo"},
             {"data":"telefono"},
-            {"data":"descripcion_part"},
             {"data":"descripcion"},
             {"data":"status", "render": status_simple},
-            {"defaultContent": "<button type='button' title='Editar participante' class='editar btn btn-primary'><i class='glyphicon glyphicon-edit'></i></button>  <button type='button' title='eliminar participante'  class='eliminar btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"},
+            {"defaultContent": "<button type='button' title='Editar profesor' class='editar btn btn-primary'><i class='glyphicon glyphicon-edit'></i></button>  <button type='button' title='eliminar profesor'  class='eliminar btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"},
         ],
         "columnDefs": [
             {
@@ -185,8 +161,8 @@ var lista = function(){
         "language": cambiarcontenido
 
     });
-    data_editar("#todosParticipantes tbody", table);
-    data_eliminar("#todosParticipantes tbody", table);
+    data_editar("#todosProfesores tbody", table);
+    data_eliminar("#todosProfesores tbody", table);
 }
     var data_editar = function(tbody, table){
         $(tbody).on("click", "button.editar", function(){
@@ -194,9 +170,9 @@ var lista = function(){
             var cedula = data.cedula;
             var nombre = data.nombre;
             var apellido = data.apellido;
-             var bool=confirm("Seguro quieres editar el participante: "+nombre+" "+apellido+"?");
+             var bool=confirm("Seguro quieres editar el el profesor: "+nombre+" "+apellido+"?");
             if(bool){
-                ModicarParti(cedula);
+                ModicarProfesor(cedula);
             }
             
         
@@ -208,9 +184,9 @@ var lista = function(){
                 var id = data.id;
                 var nombre = data.nombre;
                 var apellido = data.apellido;
-                 var bool=confirm("Seguro quieres eliminar el participante: "+nombre+" "+apellido+"?");
+                 var bool=confirm("Seguro quieres eliminar el profesor: "+nombre+" "+apellido+"?");
                 if(bool){
-                    eliminarParti(id);
+                    eliminarProfe(id);
                     lista();
 
                 }
@@ -220,12 +196,12 @@ var lista = function(){
 
     var cambiarcontenido = {
         "sProcessing":     "Procesando...",
-        "sLengthMenu":     "Mostrar: _MENU_ participantes",
-        "sZeroRecords":    "No se encontraron participantes registrados",
-        "sEmptyTable":     "Ningún participante disponible",
-        "sInfo":           "Participantes del _START_ al _END_ de un total de _TOTAL_ participantes",
-        "sInfoEmpty":      "Participantes del 0 al 0 de un total de 0 participantes",
-        "sInfoFiltered":   "(filtrado de un total de _MAX_ participante)",
+        "sLengthMenu":     "Mostrar: _MENU_ profesores",
+        "sZeroRecords":    "No se encontraron profesores registrados",
+        "sEmptyTable":     "Ningún profesor disponible",
+        "sInfo":           "Profesores del _START_ al _END_ de un total de _TOTAL_ profesores",
+        "sInfoEmpty":      "Profesores del 0 al 0 de un total de 0 profesores",
+        "sInfoFiltered":   "(filtrado de un total de _MAX_ profesores)",
         "sInfoPostFix":    "",
         "sSearch":         "Buscar:",
         "sUrl":            "",
@@ -243,22 +219,22 @@ var lista = function(){
         }
     }
 
-    var eliminarParti = function(id){
+    var eliminarProfe = function(id){
                 var parametros = {
                 "id" : id,
         };
         $.ajax({
             data: parametros,
             type: "POST",
-            url: "controlador/participante-control.php?x=6",
+            url: "controlador/profesor-control.php?x=6",
             
             success: function(response){
 
                 if (response=="error") {
-                    alert("No se pudo eliminar el participante");
+                    alert("No se pudo eliminar el profesor");
                 }
                 else{
-                    alert("El participante ha sido eliminado con exito");
+                    alert("El profesor ha sido eliminado con exito");
                 }
             }
         });

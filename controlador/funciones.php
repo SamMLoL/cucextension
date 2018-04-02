@@ -156,15 +156,6 @@ switch ($x){
 
         session_start();
         $_SESSION['id_disciplina']= $id_disciplina;
-      /*  <br><center><br><button title='Consultar participantes' id='".$id."' type='button' class='btn btn-primary'>Consultar los participantes </button>  
-
-        <script>
-            $(\"".$id."\").on('click',function(){
-                $('#modalparticipantes').load('controlador/funciones.php?x=9&id_disciplina=".$id_disciplina."',function(){
-                    $('#participantes-modal').modal({show:true});
-                });
-            });
-        </script>."; */
 
     break;
 	

@@ -9,6 +9,7 @@ class participante{
 	private $apellido;
 	private $edad;
 	private $sexo;
+	private $carrera;
 	private $correo;
 	private $telefono;
 	private $descripcion_part;
@@ -23,6 +24,7 @@ class participante{
 		$this->apellido="";
 		$this->edad="";
 		$this->sexo="";
+		$this->carrera="";
 		$this->correo="";
 		$this->telefono="";
 		$this->descripcion_part="";
@@ -154,6 +156,7 @@ class participante{
 			return false;
 		}
 	}
+	
 	public function MostrarTodos()
 	{
 		$conex = new Conexion();
@@ -205,6 +208,8 @@ class participante{
 		WHERE
 
 		 participantes.id_disciplina = '$id_disciplina'
+		AND
+		 participantes.status=TRUE
  		ORDER BY
   		  participantes.cedula ASC;");
 

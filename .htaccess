@@ -10,8 +10,15 @@ RewriteRule ^agregar-participantes /cucextension/controlador/index.php?x=2
 RewriteRule ^consultar-participantes /cucextension/controlador/index.php?x=3
 RewriteRule ^mostrar-participante /cucextension/controlador/index.php?x=4
 RewriteRule ^lista-participantes /cucextension/controlador/index.php?x=5
-RewriteRule ^eventos /cucextension/controlador/index.php?x=6
 
-RewriteRule ^profesores /cucextension/controlador/index.php?x=10
+
+RewriteRule ^profesores /cucextension/controlador/index.php?x=6
+RewriteRule ^agregar-profesores /cucextension/controlador/index.php?x=7
+RewriteRule ^consultar-profesores /cucextension/controlador/index.php?x=8
+RewriteRule ^mostrar-profesor /cucextension/controlador/index.php?x=9
+RewriteRule ^lista-profesores /cucextension/controlador/index.php?x=10
+
+
+RewriteRule ^eventos /cucextension/controlador/index.php?x=11
 
 DirectoryIndex /cucextension/controlador/index.php       
