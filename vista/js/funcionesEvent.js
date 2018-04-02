@@ -299,6 +299,10 @@ $(document).ready(function(){
             $('#participantesmodal').modal('show');
             $("#tablaEventos").load('controlador/participante-control.php?x=7');
         });
+        $(document).on('click', '#modalprofesores', function() {
+            $('#profesoresmodal').modal('show');
+            $("#ProfesoresEventos").load('controlador/profesor-control.php?x=7');
+        });
 });
 
 

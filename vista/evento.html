@@ -40,6 +40,7 @@
                                                 
                                             </div>
                                             <div class="modal-footer">
+                                            <button title='Consultar participantes' id='modalprofesores' type='button' class='btn btn-primary'>Consultar los profesores </button>
                                             <button title='Consultar participantes' id='modallistaparticipantes' type='button' class='btn btn-primary'>Consultar los participantes </button>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                             </div>
@@ -49,13 +50,6 @@
 
                             <!--ventana modal para el participantes-->
                             <div class="modal fade" id="participantesmodal">
-                                                            <script>
-                            $(document).ready(function() {
-
-
-                                });
-
-                            </script>
                                 <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-body" id="modalparticipantes" style="height: 400px">
@@ -69,6 +63,30 @@
                                                         </tr> 
                                                         </thead>
                                                         <tbody id="tablaEventos">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+                            <!--ventana modal para eventos -->
+                            <div class="modal fade" id="profesoresmodal">
+                                <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body" id="modalparticipantes" style="height: 400px">
+                                                <table class="table table-hover table-inverse">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Cedula</th>
+                                                            <th>Nombre</th>
+                                                            <th>Apellido</th>
+                                                        </tr> 
+                                                    </thead>
+                                                    <tbody id="ProfesoresEventos">
 
                                                     </tbody>
                                                 </table>

@@ -171,6 +171,35 @@ class profesor{
 			return false;
 		}
 	}
+	public function ProfesoresDisciplina($id_disciplina)
+	{
+		$conex = new Conexion();
+		$conex->conectar();
+
+		$query = pg_query("SELECT 
+		  profesor.nombre, 
+		  profesor.apellido,  
+		  profesor.cedula, 
+		  profesor.id_disciplina 
+		FROM 
+		  public.profesor 
+		WHERE
+
+		 profesor.id_disciplina = '$id_disciplina'
+		AND
+		 profesor.status=TRUE
+ 		ORDER BY
+  		  profesor.cedula ASC;");
+
+		if ($query) 
+		{
+			return $query;			
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 }
 ?>

@@ -127,5 +127,26 @@ switch ($x){
 	}
 
 	break;
+
+	case 7:
+		session_start();
+		$id_disciplina = $_SESSION['id_disciplina'];
+
+		$obj_profesores = new profesor();
+		$todos = $obj_profesores->ProfesoresDisciplina($id_disciplina);
+		if (!$todos) {
+			die("error");
+		}
+		else{
+
+			while ($data = pg_fetch_assoc($todos)) {
+				echo "<tr><td>" . $data['cedula'].  "</td><td>" . $data['nombre']. "</td><td>" . $data['apellido']."</td></tr>";
+			};
+			
+		}
+
+		
+
+	break;
 }
 ?>
