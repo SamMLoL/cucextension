@@ -1,5 +1,6 @@
 <?php 
 require_once('conexion.php');
+
 class usuario{
  private $id; 
  private $correo;
@@ -63,12 +64,14 @@ class usuario{
 
 	}
 
-	public function Recuperar($id)
+	public function Recuperar($id, $correo)
 	{
 		$obj_conex = new Conexion();
 		$obj_conex -> conectar();
-		$query = @pg_query(" SELECT * FROM
-			public.usuario WHERE id='$id';");
+		$query = @pg_query(" SELECT * 
+			FROM public.usuario 
+			WHERE id='$id'
+			AND correo= '$correo';");
 		if (pg_num_rows($query)>0) {
 			return $query;
 		}

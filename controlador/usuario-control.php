@@ -1,7 +1,7 @@
 <?php
 require_once('../modelo/funciones-usuario.php');
 
-
+$claveadministrador="extension123";
 $x=0;
 if(array_key_exists('x', $_GET)){
 	$x = $_GET['x'];
@@ -44,7 +44,7 @@ switch ($x){
 			$clave_admin = $_POST['claveadmin'];
 			$clave_ver = $_POST['confirclave'];
 
-			if ($clave_admin=="extension123") {
+			if ($clave_admin==$claveadministrador) {
 
 				if ($clave_ver==$clave) {
 
@@ -114,7 +114,32 @@ switch ($x){
 		echo $status;
 
 
-		break;
+	break;
+	case 6:
+		$id = $_POST["usuario"];
+		$correo = $_POST['correo'];
+		$clave_admin = $_POST['claveadmin'];
+
+		if ($clave_admin==$claveadministrador) {
+
+			$obj_recuperar= new usuario();
+			$crear = $obj_recuperar->Recuperar($id, $correo);
+
+			if ($crear) {
+				$row = pg_fetch_assoc($crear);
+				echo "<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>Se ha recuperado la contraseña con exito</strong> <div><br><p align='center'>La contraseña del usuario <b> ".$row['id']." </b>es<b> ".$row['clave']."</b></p></div></div>";
+
+				}
+			else {
+						echo "<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> Usuario o correo incorrectos.</div>";
+		 	}
+		}
+		else{
+
+			echo "<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>¡Error!</strong> Contraseña de administrador incorrecta</div>";
+		}
+
+	break;
 
 	default: 
 	header("Location: ../inicio");

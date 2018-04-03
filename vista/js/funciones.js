@@ -57,6 +57,7 @@
 
             }
          });
+
             $("#formulogin").validate({
             rules: {
                 usuariologin: { required: true, minlength: 4, maxlength: 25},
@@ -101,6 +102,41 @@
                     var inputName = $(element).attr('name')
                     $('#error-'+inputName).append(error)
                   }
+            }
+         });
+
+        $("#formuRecuperar").validate({
+            rules: {
+                usuario: { required: true, minlength: 4, maxlength: 25},
+                correo: { required:true, email: true, minlength: 13, maxlength: 50},
+                claveadmin:{ required:true, minlength: 6, maxlength:25}
+            },
+            messages: {
+                usuario: {required: 'Debe introducir un usuario.', minlength: 'El mínimo permitido son 4 caracteres.', maxlength: 'El máximo permitido son 25 caracteres.'},
+                correo : "Debe introducir un email válido.",
+                claveadmin: "Debes introducir la contraseña de Administrador",
+
+            },
+            submitHandler: function(form){
+                $.ajax({
+                    type: "POST",
+                    url:"controlador/usuario-control.php?x=6",
+                    data: $("#formuRecuperar").serialize(),
+                    beforeSend:function(){
+                        $('#registrar').val('Conectando...');
+                    },
+                    success: function(data){
+                      $("#RespuestaRecuperar").html(data);
+                      $('#registrar').val('Registrar');
+                    }
+                });
+                    borrar();
+                    function borrar(){
+                       $( "form input:password" ).val('') ;
+                    };
+
+                return false
+
             }
          });
 

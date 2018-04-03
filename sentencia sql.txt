@@ -1,0 +1,428 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.22
+-- Dumped by pg_dump version 9.3.22
+-- Started on 2018-04-02 10:58:59
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 1 (class 3079 OID 11750)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1993 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 171 (class 1259 OID 16404)
+-- Name: disciplina; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.disciplina (
+    id_disciplina integer NOT NULL,
+    descripcion character varying,
+    status boolean,
+    unidad character varying
+);
+
+
+ALTER TABLE public.disciplina OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 16407)
+-- Name: diciplina_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.diciplina_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.diciplina_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1994 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: diciplina_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.diciplina_id_seq OWNED BY public.disciplina.id_disciplina;
+
+
+--
+-- TOC entry 173 (class 1259 OID 16409)
+-- Name: evento; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.evento (
+    id integer NOT NULL,
+    body character varying,
+    title character varying,
+    class character varying,
+    start character varying,
+    "end" character varying,
+    url character varying,
+    inicio_normal character varying,
+    final_normal character varying,
+    id_disciplina integer
+);
+
+
+ALTER TABLE public.evento OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 16415)
+-- Name: evento_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.evento_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.evento_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1995 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: evento_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.evento_id_seq OWNED BY public.evento.id;
+
+
+--
+-- TOC entry 175 (class 1259 OID 16417)
+-- Name: participantes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.participantes (
+    nombre character varying,
+    edad character varying,
+    sexo character varying,
+    descripcion_part character varying,
+    telefono character varying,
+    correo character varying,
+    id_disciplina integer,
+    status boolean,
+    cedula character varying,
+    apellido character varying,
+    carrera character varying,
+    id integer NOT NULL
+);
+
+
+ALTER TABLE public.participantes OWNER TO postgres;
+
+--
+-- TOC entry 179 (class 1259 OID 16481)
+-- Name: participantes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.participantes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.participantes_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1996 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: participantes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.participantes_id_seq OWNED BY public.participantes.id;
+
+
+--
+-- TOC entry 176 (class 1259 OID 16421)
+-- Name: profesor; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.profesor (
+    id integer NOT NULL,
+    nombre character varying,
+    apellido character varying,
+    id_disciplina integer,
+    status boolean,
+    cedula character varying,
+    sexo character varying,
+    telefono character varying,
+    edad character varying
+);
+
+
+ALTER TABLE public.profesor OWNER TO postgres;
+
+--
+-- TOC entry 177 (class 1259 OID 16424)
+-- Name: profesor_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.profesor_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.profesor_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1997 (class 0 OID 0)
+-- Dependencies: 177
+-- Name: profesor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.profesor_id_seq OWNED BY public.profesor.id;
+
+
+--
+-- TOC entry 178 (class 1259 OID 16429)
+-- Name: usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.usuario (
+    correo character varying,
+    clave character varying,
+    status boolean,
+    id character varying NOT NULL
+);
+
+
+ALTER TABLE public.usuario OWNER TO postgres;
+
+--
+-- TOC entry 1850 (class 2604 OID 16434)
+-- Name: id_disciplina; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.disciplina ALTER COLUMN id_disciplina SET DEFAULT nextval('public.diciplina_id_seq'::regclass);
+
+
+--
+-- TOC entry 1851 (class 2604 OID 16435)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.evento ALTER COLUMN id SET DEFAULT nextval('public.evento_id_seq'::regclass);
+
+
+--
+-- TOC entry 1852 (class 2604 OID 16483)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.participantes ALTER COLUMN id SET DEFAULT nextval('public.participantes_id_seq'::regclass);
+
+
+--
+-- TOC entry 1853 (class 2604 OID 16436)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profesor ALTER COLUMN id SET DEFAULT nextval('public.profesor_id_seq'::regclass);
+
+
+--
+-- TOC entry 1998 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: diciplina_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.diciplina_id_seq', 49, true);
+
+
+--
+-- TOC entry 1976 (class 0 OID 16404)
+-- Dependencies: 171
+-- Data for Name: disciplina; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+--
+-- TOC entry 1978 (class 0 OID 16409)
+-- Dependencies: 173
+-- Data for Name: evento; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+--
+-- TOC entry 1999 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: evento_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.evento_id_seq', 101, true);
+
+
+--
+-- TOC entry 1980 (class 0 OID 16417)
+-- Dependencies: 175
+-- Data for Name: participantes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+--
+-- TOC entry 2000 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: participantes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.participantes_id_seq', 39, true);
+
+
+--
+-- TOC entry 1981 (class 0 OID 16421)
+-- Dependencies: 176
+-- Data for Name: profesor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+--
+-- TOC entry 2001 (class 0 OID 0)
+-- Dependencies: 177
+-- Name: profesor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.profesor_id_seq', 11, true);
+
+
+--
+-- TOC entry 1983 (class 0 OID 16429)
+-- Dependencies: 178
+-- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+--
+-- TOC entry 1855 (class 2606 OID 16444)
+-- Name: diciplina_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.disciplina
+    ADD CONSTRAINT diciplina_pkey PRIMARY KEY (id_disciplina);
+
+
+--
+-- TOC entry 1857 (class 2606 OID 16446)
+-- Name: evento_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.evento
+    ADD CONSTRAINT evento_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1859 (class 2606 OID 16675)
+-- Name: participantes_cedula_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.participantes
+    ADD CONSTRAINT participantes_cedula_key UNIQUE (cedula);
+
+
+--
+-- TOC entry 1861 (class 2606 OID 16489)
+-- Name: participantes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.participantes
+    ADD CONSTRAINT participantes_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1863 (class 2606 OID 16448)
+-- Name: profesor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.profesor
+    ADD CONSTRAINT profesor_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1865 (class 2606 OID 16578)
+-- Name: usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.usuario
+    ADD CONSTRAINT usuario_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1867 (class 2606 OID 16456)
+-- Name: artista_id_diciplina_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.participantes
+    ADD CONSTRAINT artista_id_diciplina_fkey FOREIGN KEY (id_disciplina) REFERENCES public.disciplina(id_disciplina);
+
+
+--
+-- TOC entry 1866 (class 2606 OID 16604)
+-- Name: evento_id_disciplina_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.evento
+    ADD CONSTRAINT evento_id_disciplina_fkey FOREIGN KEY (id_disciplina) REFERENCES public.disciplina(id_disciplina);
+
+
+--
+-- TOC entry 1868 (class 2606 OID 16476)
+-- Name: profesor_id_disciplina_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profesor
+    ADD CONSTRAINT profesor_id_disciplina_fkey FOREIGN KEY (id_disciplina) REFERENCES public.disciplina(id_disciplina);
+
+
+--
+-- TOC entry 1992 (class 0 OID 0)
+-- Dependencies: 7
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2018-04-02 10:58:59
+
+--
+-- PostgreSQL database dump complete
+--
+
