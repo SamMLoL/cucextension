@@ -146,7 +146,7 @@
         
         function mostrarboton(){
     
-                $("#boton").html("<div class='pull-right form-inline'><button class='btn btn-info' data-toggle='modal'style=\"width:150px; height:35px;\" data-target='#add_evento'>Añadir Evento</button><br><br><button class='btn btn-danger' style=\"width:150px; height:35px;\" data-toggle='modal' data-target='#EliminarEvento'>Eliminar Evento</button></div>");
+                $("#boton").html("<div class='pull-right form-inline'><button class='btn btn-info' data-toggle='modal'style=\"width:150px; height:35px;\" data-target='#add_evento'>Agregar Evento</button><br><br><button class='btn btn-danger' style=\"width:150px; height:35px;\" data-toggle='modal' data-target='#EliminarEvento'>Eliminar Evento</button></div>");
          
 
         };

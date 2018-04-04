@@ -172,7 +172,7 @@ var lista = function(){
             {"data":"descripcion_part"},
             {"data":"descripcion"},
             {"data":"status", "render": status_simple},
-            {"defaultContent": "<button type='button' title='Editar participante' class='editar btn btn-primary'><i class='glyphicon glyphicon-edit'></i></button>  <button type='button' title='eliminar participante'  class='eliminar btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"},
+            {"defaultContent": "<button type='button' title='Modificar participante' class='editar btn btn-primary'><i class='glyphicon glyphicon-edit'></i></button>  <button type='button' title='eliminar participante'  class='Eliminar btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"},
         ],
         "columnDefs": [
             {

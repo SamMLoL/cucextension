@@ -1,5 +1,6 @@
 <?php
-require_once('../modelo/model-funciones.php');
+require_once('../modelo/model-disciplina.php');
+require_once('../modelo/model-evento.php');
 date_default_timezone_set("America/Caracas");
 
 $x=0;
@@ -12,7 +13,7 @@ switch ($x){
 	case 1:  
     $unidad=htmlspecialchars(urldecode(($_GET['unidad'])));
 
-    $obj_buscar = new objetos();
+    $obj_buscar = new disciplina();
 	    $all= $obj_buscar->selectdis($unidad);
 	    echo '<option disabled value="0" selected>Seleccionar</option>';
 	    while ( $row = pg_fetch_assoc($all) )    
@@ -29,7 +30,7 @@ switch ($x){
 
 			$descripcion = $_POST["nombre"];
             $unidad = $_POST["unidad"];
-			$obj_registrar = new objetos();
+			$obj_registrar = new disciplina();
             $validarDisciplina = $obj_registrar->verificarDisciplina($descripcion);
             $validar = pg_fetch_array($validarDisciplina);
 
@@ -54,7 +55,7 @@ switch ($x){
 //FUNCION Eliminar DISCIPLINA
 	case 3:
 			$id_disciplina = $_POST["id_disciplina2"];
-			$obj_eliminar = new objetos();
+			$obj_eliminar = new disciplina();
         	$eliminar = $obj_eliminar->EliminarDisciplina($id_disciplina);
 
 			if ($eliminar) {
@@ -91,7 +92,7 @@ switch ($x){
             $id_disciplina  = evaluar($_POST['id_disciplina3']);
             $clase  = evaluar($_POST['class']);
 
-            $obj_evento = new objetos();
+            $obj_evento = new evento();
             $evento = $obj_evento->AgregarEvento($titulo,$contenido,$clase,$inicio,$final,$id_disciplina,$inicio_normal,$final_normal);
 
 
@@ -111,7 +112,7 @@ switch ($x){
             
     $id  = evaluar($_GET['id']);
 
-    $obj_evento = new objetos();
+    $obj_evento = new evento();
     $evento = $obj_evento->ConsultaEventos($id);
 
     $row = pg_fetch_assoc($evento);
@@ -148,11 +149,11 @@ switch ($x){
     echo "
          <h3>".$titulo."</h3>
          <hr>
-         <b>Fecha inicio:</b> ".$inicio."
-         <b>Fecha termino:</b> ".$final."
-         <b>Descripcion: </b><p>".$evento."</p>
-        <b>tipo de evento:</b> ".$tipo."
-        <br><b>Disciplina:</b> ".$disciplina;
+         <b>Fecha inicio:</b> ".$inicio."<br>
+         <b>Fecha termino:</b> ".$final."<br>
+        <br><b>tipo de evento:</b> ".$tipo."<br>
+        <br><b>Disciplina:</b> ".$disciplina."<br>
+        <br><b>Descripcion: </b><p>".$evento."</p>";
 
         session_start();
         $_SESSION['id_disciplina']= $id_disciplina;
@@ -199,7 +200,7 @@ switch ($x){
 
         $id_disciplina= htmlspecialchars(urldecode(($_GET['id_disciplina'])));
 
-        $obj_evento = new objetos();
+        $obj_evento = new evento();
         $resultado = $obj_evento->AutocompeteEventos($id_disciplina);
 
         echo '<option disabled value="0" selected>Seleccionar</option>';
@@ -219,7 +220,7 @@ switch ($x){
         
         $id = $_POST['nombreevento'];
 
-        $obj_evento = new objetos();
+        $obj_evento = new evento();
         $EliminarEvento = $obj_evento->EliminarEvento($id);
 
 
